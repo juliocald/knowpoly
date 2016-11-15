@@ -1,0 +1,102 @@
+h1
+{
+	text-align: center;
+}
+
+#site_tagline { 
+    text-align: center;
+    margin: 1cm;
+}
+
+#site_menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+li {
+	display:inline;
+}
+
+li a {
+    display: inline-block;
+    color: black;
+    padding: 0px 50px;
+    text-decoration: none;
+}
+
+li.verticalList {
+    display:list-item;
+}
+
+
+body
+{
+   font-family: "Lucida Grande", sans-serif;
+   margin: 1cm;
+}
+
+p { 
+    color: black;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 3px;
+}
+
+th {
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+span {
+    opacity: 0.3;
+    font-weight: bold;
+    font-size: 3.5em;
+    position: absolute;
+    z-index: -1;
+}
+
+p.hometown {
+    color: black;
+}
+
+h2.centerh2heading {
+    text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #f2f2f2;
+}
+
+.box {
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+  background-color: #efefef;
+}
+
+.tweets   { background-color: #A2DED0; }
+.replies  { background-color: #F4D03F; }
+.search   { background-color: #6C7A89; }
+.messages { background-color: #59ABE3; }
+
+/* Our Grid Code */
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50vh 50vh;
+}
+
+
