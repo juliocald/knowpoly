@@ -1,21 +1,44 @@
-/* Diseno del Grid */
+/* Diseño del Grid */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 40vh 40vh;
+  grid-template-columns: 25vh 25vh 25vh 25vh 25vh 25vh 25vh 25vh;
+  grid-template-rows: 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh;
 }
 
 /* ---------- Posiciones de cada elemento ----------- */
 
 /* Posicion de cada jugador */
-.player_1_pos { grid-column: 1 grid-row: 1; z-index: 5;}
-.player_2_pos { grid-column: 2; grid-row: 1;}
-.player_3_pos { grid-column: 1; grid-row: 2;}
-.player_4_pos { grid-column: 2; grid-row: 2;}
+.player_1_pos { grid-column: 1 / span 4; grid-row: 1 / span 4;}
+.player_2_pos { grid-column: 5 / span 4; grid-row: 1 / span 4;}
+.player_3_pos { grid-column: 1 / span 4; grid-row: 5 / span 4;}
+.player_4_pos { grid-column: 5 / span 4; grid-row: 5 / span 4;}
 
-/* Posicion del tablero */
-.game_board_pos { grid-column: 1 / span 2; grid-row: 1 / span 2;
-     z-index: 5; justify-self: center; align-self: center; }
+/* Posicion celdas del tablero */
+.start_cell_pos { grid-column: 2; grid-row: 2 / span 2;}
+.prop1_cell_pos { grid-column: 3; grid-row: 2 / span 2;}
+.prop2_cell_pos { grid-column: 4; grid-row: 2 / span 2;}
+.prop3_cell_pos { grid-column: 5; grid-row: 2 / span 2;}
+.prop4_cell_pos { grid-column: 6; grid-row: 2 / span 2;}
+.first_hotchair_cell_pos { grid-column: 7; grid-row: 2 / span 2;}
+.prop5_cell_pos { grid-column: 7; grid-row: 4;}
+.prop6_cell_pos { grid-column: 7; grid-row: 5;}
+.cave_cell_pos { grid-column: 7; grid-row: 6 / span 2;}
+.prop7_cell_pos { grid-column: 6; grid-row: 6 / span 2;}
+.prop8_cell_pos { grid-column: 5; grid-row: 6 / span 2;}
+.prop9_cell_pos { grid-column: 4; grid-row: 6 / span 2;}
+.prop10_cell_pos { grid-column: 3; grid-row: 6 / span 2;}
+.second_hotchair_cell_pos { grid-column: 2; grid-row: 6 / span 2;}
+.prop11_cell_pos { grid-column: 2; grid-row: 5;}
+.prop12_cell_pos { grid-column: 2; grid-row: 4;}
+
+/* Posicion seccion de preguntas */
+.question_pos { grid-column: 3 / span 2; grid-row: 4 / span 2; }
+
+/* Posicion seccion del Dado */
+.dice_pos { grid-column: 5; grid-row: 4 / span 2;}
+
+/* Posicion seccion de fin de turno */
+.finish_turn_pos { grid-column: 6; grid-row: 4 / span 2;}
 
 /* --------------------------------------------------- */
 
@@ -27,10 +50,18 @@
 .player_3_sty   { background-color: #6C7A89; text-align: left;}
 .player_4_sty { background-color: #59ABE3; text-align: right;}
 
-/* Estilo del tablero */
-.game_board_sty { background-color: #FFFFFF; padding-top: 15em; padding-bottom: 15em;
-	 padding-left: 30em; padding-right: 30em;}
+/* Estilo de celdas del tablero */
+.cell_sty { background-color: #FFFFFF; text-align: center;}
+.corner_cell_sty { background-color: #FF00FF; text-align: center;}
 
+/* Estilo de seccion de preguntas */
+.question_sty { background: #FF4500; text-align: center;}
+
+/* Estilo del dado */
+.dice_sty { background: #FFDEAD; text-align: center;}
+
+/* Estilo de seccion fin de turno */
+.finish_turn_sty { background: #FFD700; text-align: center;}
 
 /* ------------------------------ */
 
