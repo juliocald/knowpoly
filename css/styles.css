@@ -1,9 +1,52 @@
+/* Diseno del Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40vh 40vh;
+}
+
+/* ---------- Posiciones de cada elemento ----------- */
+
+/* Posicion de cada jugador */
+.player_1_pos { grid-column: 1 grid-row: 1; z-index: 5;}
+.player_2_pos { grid-column: 2; grid-row: 1;}
+.player_3_pos { grid-column: 1; grid-row: 2;}
+.player_4_pos { grid-column: 2; grid-row: 2;}
+
+/* Posicion del tablero */
+.game_board_pos { grid-column: 1 / span 2; grid-row: 1 / span 2;
+     z-index: 5; justify-self: center; align-self: center; }
+
+/* --------------------------------------------------- */
+
+/* ---------- Estilos de cada elemento -------------- */
+
+/* Estilo de cada grid de jugador */
+.player_1_sty   { background-color: #A2DED0; text-align: left;}
+.player_2_sty  { background-color: #F4D03F; text-align: right;}
+.player_3_sty   { background-color: #6C7A89; text-align: left;}
+.player_4_sty { background-color: #59ABE3; text-align: right;}
+
+/* Estilo del tablero */
+.game_board_sty { background-color: #FFFFFF; padding-top: 15em; padding-bottom: 15em;
+	 padding-left: 30em; padding-right: 30em;}
+
+
+/* ------------------------------ */
+
+/* Inicio de estilos de la pagina*/
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #f2f2f2;
+}
+
 h1
 {
 	text-align: center;
 }
 
-#site_tagline { 
+#site_tagline {
     text-align: center;
     margin: 1cm;
 }
@@ -39,7 +82,7 @@ body
    margin: 1cm;
 }
 
-p { 
+p {
     color: black;
 }
 
@@ -73,30 +116,3 @@ p.hometown {
 h2.centerh2heading {
     text-align: center;
 }
-
-body {
-  margin: 0;
-  font-family: Arial;
-  background-color: #f2f2f2;
-}
-
-.box {
-  color: #fff;
-  padding: 1em;
-  text-align: center;
-  background-color: #efefef;
-}
-
-.tweets   { background-color: #A2DED0; }
-.replies  { background-color: #F4D03F; }
-.search   { background-color: #6C7A89; }
-.messages { background-color: #59ABE3; }
-
-/* Our Grid Code */
-.app-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50vh 50vh;
-}
-
-
