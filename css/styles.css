@@ -1,8 +1,8 @@
 /* Diseño del Grid */
 .grid {
   display: grid;
-  grid-template-columns: 25vh 25vh 25vh 25vh 25vh 25vh 25vh 25vh;
-  grid-template-rows: 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh;
+  grid-template-columns: 20vh 25vh 25vh 25vh 25vh 25vh 25vh 20vh;
+  grid-template-rows: 8vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 8vh;
 }
 
 /* ---------- Posiciones de cada elemento ----------- */
