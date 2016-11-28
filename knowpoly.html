@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-   <meta name="author" content="Julio Calderón, José P. Urena" />
-   <meta name="copyright" content="&copy; 2016 ECCI-UCR" />
-   <meta name="keywords" content="desarrollo web, curso, evaluación" />
-   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-   <link rel="icon" href="images/favicon.ico"/>
-   <title>knowpoly</title>
+ <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+ <meta name="author" content="Julio Calderón, José P. Urena" />
+ <meta name="copyright" content="&copy; 2016 ECCI-UCR" />
+ <meta name="keywords" content="desarrollo web, curso, evaluación" />
+ <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+ <link rel="icon" href="images/favicon.ico"/>
+ <title>knowpoly</title>
 </head>
 
 <body>
-   <header id="site_header">
-      <h1 id="site_title">knowpoly</h1>
-   </header>
-   <hr></hr>
-   <script src="knowpoly.js"></script>
+ <header id="site_header">
+  <h1 id="site_title">knowpoly</h1>
+</header>
+<hr></hr>
+<script src="knowpoly.js"></script>
 
 <div class="grid">
-  <div class="player_1_pos player_1_sty">Jugador 2</div>
-  <div class="player_2_pos player_2_sty">Jugador 2</div>
-  <div class="player_3_pos player_3_sty">Jugador 3</div>
-  <div class="player_4_pos player_4_sty">Jugador 4</div>
+  <div class="player_1_pos player_1_sty" onclick="newPlayer(1)" id="player1">Jugador 1</div>
+  <div class="player_2_pos player_2_sty" onclick="newPlayer(2)" id="player2">Jugador 2</div>
+  <div class="player_3_pos player_3_sty" onclick="newPlayer(3)" id="player3">Jugador 3</div>
+  <div class="player_4_pos player_4_sty" onclick="newPlayer(4)" id="player4">Jugador 4</div>
   <div class="start_cell_pos corner_cell_sty">Entrada</div>
   <div class="prop1_cell_pos cell_sty">Propiedad 1</div>
   <div class="prop2_cell_pos cell_sty">Propiedad 2</div>
@@ -39,12 +39,21 @@
   <div class="prop11_cell_pos cell_sty">Propiedad 11</div>
   <div class="prop12_cell_pos cell_sty">Propiedad 12</div>
   <div class="question_pos question_sty">Pregunta para Usuario</div>
-  <div class="dice_pos dice_sty">Dado</div>
-  <div class="finish_turn_pos finish_turn_sty">Terminar turno</div>
+  <div class="dice_pos dice_sty">
+    <br>
+    <div id="diceBox"></div>
+    <br>
+    <button onclick='buttonFunc()'>Roll!</button>
+  </div>
+  <div class="finish_turn_pos finish_turn_sty">
+    <button>Iniciar partida</button>
+    <button>Terminar turno</button>
+  </div>
 </div>
 
-  <footer id="page_footer">
-   <p><small>© 2016. Julio Calderón & José Ureña. Todos los derechos reservados.</small></p>
+
+<footer id="page_footer">
+ <p><small>© 2016. Julio Calderón & José Ureña. Todos los derechos reservados.</small></p>
 </footer>
 </body>
 </html>
