@@ -79,17 +79,17 @@ h1
 }
 
 #site_tagline {
-    text-align: center;
-    margin: 1cm;
+  text-align: center;
+  margin: 1cm;
 }
 
 #site_menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    text-align: center;
-    font-size: 1.5em;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  font-size: 1.5em;
 }
 
 li {
@@ -97,87 +97,137 @@ li {
 }
 
 li a {
-    display: inline-block;
-    color: black;
-    padding: 0px 50px;
-    text-decoration: none;
+  display: inline-block;
+  color: black;
+  padding: 0px 50px;
+  text-decoration: none;
 }
 
 li.verticalList {
-    display:list-item;
+  display:list-item;
 }
 
 
 body
 {
-   font-family: "Lucida Grande", sans-serif;
-   margin: 1cm;
+ font-family: "Lucida Grande", sans-serif;
+ margin: 1cm;
 }
 
 p {
-    color: black;
+  color: black;
 }
 
 table, th, td {
-    border: 1px solid black;
-    text-align: center;
-    padding: 3px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 3px;
 }
 
 th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 table {
-    border-collapse: collapse;
-    margin: 0 auto;
+  border-collapse: collapse;
+  margin: 0 auto;
 }
 
 span {
-    opacity: 0.3;
-    font-weight: bold;
-    font-size: 3.5em;
-    position: absolute;
-    z-index: -1;
+  opacity: 0.3;
+  font-weight: bold;
+  font-size: 3.5em;
+  position: absolute;
+  z-index: -1;
 }
 
 p.hometown {
-    color: black;
+  color: black;
 }
 
 h2.centerh2heading {
-    text-align: center;
+  text-align: center;
 }
 
 /** {
   text-align: center;
   background-color: #0bb749;
-}*/
+  }*/
 
-#diceBox {
-  height: 35px;
-  width: 80px;
-  border: 4px solid black;
-  border-radius: 20px;
-  margin: 0px auto 0px auto;
-  font-size: 60px;
-  padding: 20px;
-  line-height: 1;
-  background-color: oldlace;
-}
+  #diceBox {
+    height: 35px;
+    width: 80px;
+    border: 4px solid black;
+    border-radius: 20px;
+    margin: 0px auto 0px auto;
+    font-size: 60px;
+    padding: 20px;
+    line-height: 1;
+    background-color: oldlace;
+  }
 
-.cell_sty img {
-    width: 30%; // to maintain aspect ratio. You can use 100% if you don't care about that
-    height: 30%;
+  .cell_sty img {
+    width: 20%; // to maintain aspect ratio. You can use 100% if you don't care about that
+    height: 20%;
     display: block;
     margin: auto;
-}
+  }
 
-.corner_cell_sty img {
-    width: 30%; // to maintain aspect ratio. You can use 100% if you don't care about that
-    height: 30%;
+  .corner_cell_sty img {
+    width: 20%; // to maintain aspect ratio. You can use 100% if you don't care about that
+    height: 20%;
     display: block;
     margin: auto;
-}
+  }
 
+  #dice {
+    font-size: 100px;
+  }
+  #dice:hover {
+    cursor: pointer;
+  }
+
+  #wrap1 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap1 img { 
+    position: absolute; 
+/*    border: 0;*/
+/*    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;*/
+    transition: all 1s ease-out;
+  }
+
+    #wrap2 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap2 img { 
+    position: absolute; 
+/*    border: 0;*/
+/*    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;*/
+    transition: all 1s ease-out;
+  }
+
+    #wrap3 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap3 img { 
+    position: absolute; 
+/*    border: 0;*/
+/*    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;*/
+    transition: all 1s ease-out;
+  }
+
+    #wrap4 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap4 img { 
+    position: absolute; 
+/*    border: 0;*/
+/*    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;*/
+    transition: all 1s ease-out;
+  }
 

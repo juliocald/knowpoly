@@ -6,7 +6,7 @@
  <meta name="copyright" content="&copy; 2016 ECCI-UCR" />
  <meta name="keywords" content="desarrollo web, curso, evaluación" />
  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
- <link rel="icon" href="images/favicon.ico"/>
+<!--  <link rel="icon" href="images/favicon.ico"/> -->
  <title>knowpoly</title>
 </head>
 
@@ -15,7 +15,7 @@
   <h1 id="site_title">knowpoly</h1>
 </header>
 <hr></hr>
-<script src="knowpoly.js"></script>
+<!-- <script src="knowpoly.js"></script> -->
 
 <div class="grid">
   <div class="player_1_pos player_1_sty" onclick="newPlayer(1)" id="player1">Click para jugar
@@ -30,8 +30,9 @@
   <div class="player_4_pos player_4_sty" onclick="newPlayer(4)" id="player4">Click para jugar
     <div id="player_4_points">0/0</div>
   </div>
-  <div class="start_cell_pos corner_cell_sty">Entrada
-    <img src="images/pokeballs.svg">
+  <div class="start_cell_pos corner_cell_sty" id="casillaInicio">Entrada
+    <img src="images/star.svg">
+    <section id="wrap1" class="animations"></section>
   </div>
   <div class="prop1_cell_pos cell_sty">Propiedad 1
     <img src="images/pikachu.svg">
@@ -57,16 +58,16 @@
   <div class="cave_cell_pos corner_cell_sty">Cueva de la Icnoransia
     <img src="images/psyduck.svg">
   </div>
-  <div class="prop7_cell_pos cell_sty">Propiedad 7
+  <div class="prop7_cell_pos cell_sty" onclick="movePlayerRight(2,1)">Propiedad 7
     <img src="images/dratini.svg">
   </div>
-  <div class="prop8_cell_pos cell_sty">Propiedad 8
+  <div class="prop8_cell_pos cell_sty" onclick="movePlayerRight(3,2)">Propiedad 8
     <img src="images/eevee.svg">
   </div>
-  <div class="prop9_cell_pos cell_sty">Propiedad 9
+  <div class="prop9_cell_pos cell_sty"  onclick="movePlayerRight(5,3)">Propiedad 9
     <img src="images/jigglypuff.svg">
   </div>
-  <div class="prop10_cell_pos cell_sty">Propiedad 10
+  <div class="prop10_cell_pos cell_sty" onclick="movePlayerRight(6,4)">Propiedad 10
     <img src="images/meowth.svg">
   </div>
   <div class="second_hotchair_cell_pos corner_cell_sty">Silla Caliente
@@ -81,17 +82,20 @@
 
   <div class="question_pos question_sty">Pregunta para Usuario</div>
   <div class="dice_pos dice_sty">
-    <br>
+<!--     <br>
     <div id="diceBox"></div>
     <br>
     <button onclick='dice_buttonFunc()'>Roll!</button>
-    <button onclick='buttonFunc()'>Dar vuelta!</button>
+    <button onclick='buttonFunc()'>Dar vuelta!</button> -->
+    <div id="dice" onclick="stopstart()"></div>
   </div>
   <div class="finish_turn_pos finish_turn_sty">
     <button onclick="start_play()" id="start_game_button">Iniciar partida</button>
     <button disabled="true" id="finish_turn">Terminar turno</button>
   </div>
 </div>
+
+<script src="knowpoly.js"></script>
 
 <footer id="page_footer">
  <p><small>© 2016. Julio Calderón & José Ureña. Todos los derechos reservados.</small></p>
