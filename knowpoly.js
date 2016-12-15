@@ -10,7 +10,7 @@ var game_is_on = false;						// Indicador acerca de continuar o no el juego
 
 function getOffset(el) {
   el = el.getBoundingClientRect();
-  
+
   return {
     left: el.left + window.scrollX,
     top: el.top + window.scrollY,
@@ -38,7 +38,7 @@ function movePlayer(){
 
     var wrap1 = document.getElementById('wrap1');
 
- 
+
     // Assume the bubble image dimensions and area dimensions
     var imgWidth = 40;
     var imgHeight = 40;
@@ -126,7 +126,7 @@ function movePlayerRight(spacesToMove, playerToMove){
 				if (positionX + 20 < 120) {
 					positionX += 20;
 					spacesLeft -= 1;
-			// player.style.left = (parseInt(left)+20) + 'vh'; 
+			// player.style.left = (parseInt(left)+20) + 'vh';
 				} else {
 					positionY += 20;
 			// player.style.top = (parseInt(top)+20) + 'vh';
@@ -259,26 +259,26 @@ var chosenRandom;
 
 function change() {
   var random = Math.floor(Math.random()*6);
-  dice.innerHTML = dices[random]; 
+  dice.innerHTML = dices[random];
   chosenRandom = random;
 }
 
 function stopstart() {
   if(stopped) {
     stopped = false;
-    t = setInterval(change, 100); 
+    t = setInterval(change, 100);
   } else {
     clearInterval(t);
     stopped = true;
     console.log(chosenRandom);
   }
-  
+
 }
 
 
 // window.onload = function() {
 //   dice = document.getElementById("dice");
-//   stopstart(); 
+//   stopstart();
 // }
 // ***********************
 
@@ -299,9 +299,7 @@ function mark_player_turn(id_player){
 }
 
 function roll_dice(){									// Espera a que el jugador toque el dado
-		//console.log("cantidad de activos:"+counter_active_players());
 		var lucky = Math.floor((Math.random() * 6) + 1);
-		alert("El dado tira: "+lucky);
 		return lucky;
 }
 
@@ -347,11 +345,13 @@ function entrance_cell(player_id){									// Se le acreditan 100 unidades al ju
 }
 
 function hot_chair_cell(player_id){
-	alert("esta en silla caliente");
+	//alert("esta en silla caliente");
+  var dummy = 0;
 }
 
 function cave_cell(player_id){
-	alert("esta en cueva");
+	//alert("esta en cueva");
+  var dummy = 0;
 }
 
 function properties_manager(player_id, player_position){
@@ -385,7 +385,7 @@ function start_play(){
 
 		document.getElementById("finish_turn").disabled = false;
 		dice = document.getElementById("dice");
-  		stopstart(); 
+  		stopstart();
   		movePlayer();
   		// for(var i = 0; i < 52; i++){
   		// 	movePlayerRight();
@@ -405,9 +405,6 @@ function start_play(){
 					mark_player_turn(players[i].id);					// Se resalta el jugador activo
 					new_position = position_manager(roll_dice(),players[i].current_position_board);
 					players[i].current_position_board = new_position;
-					alert("La nueva posicion de "+players[i].name+" "+new_position);
-
-					// * Borrar comentarios, solo de guia *
 
 					// Una vez obtenido el numero, se actualiza la variable de posicion del
 					// jugador sumando la cuenta del dado, existen 16 posiciones
@@ -453,7 +450,4 @@ function start_play(){
 	}else{
 		alert("Son necesarios dos o más jugadores para iniciar la partida.");
 	}
-
 }
-
-
