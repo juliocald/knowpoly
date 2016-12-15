@@ -67,10 +67,10 @@ function movePlayer(){
 	// player.style.top = (dimensions.top) + 'px';
  //    player.style.left = (imgWidth/2) + 'px';
 
- playerIcons[0].style.top = 0 + 'vh';
- playerIcons[1].style.top = 0 + 'vh';
- playerIcons[2].style.top = 0 + 'vh';
- playerIcons[3].style.top = 0 + 'vh';
+ playerIcons[0].style.top = 5 + 'vh';
+ playerIcons[1].style.top = 5 + 'vh';
+ playerIcons[2].style.top = 5 + 'vh';
+ playerIcons[3].style.top = 5 + 'vh';
 
  playerIcons[0].style.left = 0 + 'vh';
  playerIcons[1].style.left = 5 + 'vh';
@@ -270,6 +270,7 @@ function change() {
 }
 
 function stopstart() {
+	document.getElementById("dice").style.pointerEvents = "auto";
 	if(stopped) {
 		stopped = false;
 		t = setInterval(change, 100);
@@ -472,12 +473,63 @@ var currentPlayer;
 var currentIndex;
 var pastPlayer;
 var new_position = 0;
+var currentQuestion = -1;
+var hotChair;
+var arr = [];
+
+for (var prop in questions) {
+    arr.push(questions[prop]);
+}
+
+console.log(arr[0]);
+
+function showQuestion(){
+		currentQuestion++;
+
+	if (currentQuestion == 63) {
+		currentQuestion = 0;
+	}
+
+	if (arr[0][currentQuestion].options[4] != undefined) {
+		document.getElementById("respuesta5").style.visibility = "visible";
+	}
+
+
+	document.getElementById("textoPregunta").innerHTML = arr[0][currentQuestion].text;
+	document.getElementById("respuesta1").innerHTML = "1. " + arr[0][currentQuestion].options[0];
+	document.getElementById("respuesta2").innerHTML = "2. " + arr[0][currentQuestion].options[1];
+	document.getElementById("respuesta3").innerHTML = "3. " + arr[0][currentQuestion].options[2];
+	document.getElementById("respuesta4").innerHTML = "4. " + arr[0][currentQuestion].options[3];
+
+	if (arr[0][currentQuestion].options[4] != undefined) {
+		document.getElementById("respuesta5").innerHTML = "5. " + arr[0][currentQuestion].options[4];
+	} else {
+		document.getElementById("respuesta5").style.visibility = "hidden";
+	}
+}
+
+function validateAnswer(playerAnswer){
+	if (playerAnswer == arr[0][currentQuestion].answer) {
+		alert("¡Respuesta correcta!");
+	} else {
+	alert("Respuesta incorrecta :(");
+	}
+
+	if (hotChair) {
+		players[currentPlayer].liquid_money += 50;
+	} else {
+		players[currentPlayer].liquid_money -= 25;
+		if (players[currentPlayer].liquid_money < 0) {
+			players[currentPlayer].liquid_money = 0;
+		}
+	}
+}
 
 function gameOn(){
 	pastPlayer = currentPlayer;
 	stopstart();
 	movePlayerRight(chosenRandom,currentPlayer);
-
+	document.getElementById("dice").style.pointerEvents = "none";
 	window.setTimeout(function () {
 
 		new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
@@ -492,12 +544,18 @@ function gameOn(){
 			break;
 			case 5:
 			hot_chair_cell(players[currentIndex].id);
+			hotChair = true;
+			showQuestion();
 			break;
 			case 8:
 			cave_cell(players[currentIndex].id);
+			hotChair = false;
+			showQuestion();
 			break;
 			case 13:
 			hot_chair_cell(players[currentIndex].id);
+			hotChair = true;
+			showQuestion();
 			break;
 			default:
 			properties_manager(players[currentIndex].id,new_position);
@@ -513,12 +571,18 @@ function gameOn(){
 		}
 		currentPlayer = players[currentIndex].id;
 
+<<<<<<< HEAD
 		stopstart();
+=======
+>>>>>>> origin/master
 
 		demark_player_turn(pastPlayer);
 		mark_player_turn(currentPlayer);
 	}, 1500);
 };
+
+// var questionsArray = JSON.parse(questions);
+// console.log(questionsArray);
 
 
 
@@ -543,6 +607,7 @@ function start_play(){
   		currentPlayer = players[0].id;
   		currentIndex = 0;
   		mark_player_turn(players[currentIndex].id);
+  		stopstart();
 		// while(game_is_on){
 		// 	var counter = counter_active_players();
 		// 	if(counter == 1){

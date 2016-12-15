@@ -1,7 +1,7 @@
 /* Diseño del Grid */
 .grid {
   display: grid;
-  grid-template-columns: 20vh 20vh 20vh 20vh 20vh 20vh 20vh 20vh;
+  grid-template-columns: 17vh 20vh 20vh 20vh 20vh 20vh 20vh 17vh;
 /*  grid-template-rows: 8vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 12.5vh 8vh;
 */  grid-template-rows: 20vh 20vh 20vh 20vh 20vh 20vh 20vh 20vh;
 }
@@ -9,10 +9,10 @@
 /* ---------- Posiciones de cada elemento ----------- */
 
 /* Posicion de cada jugador */
-.player_1_pos { grid-column: 1 / span 2; grid-row: 1 / span 2;}
-.player_2_pos { grid-column: 7 / span 2; grid-row: 1 / span 2;}
-.player_3_pos { grid-column: 1 / span 2; grid-row: 3 / span 2;}
-.player_4_pos { grid-column: 7 / span 2; grid-row: 3 / span 2;}
+.player_1_pos { grid-column: 1 / span 2; grid-row: 1 / span 2; font-size: 14px;}
+.player_2_pos { grid-column: 7 / span 2; grid-row: 1 / span 2; font-size: 14px;}
+.player_3_pos { grid-column: 1 / span 2; grid-row: 3 / span 2; font-size: 14px;}
+.player_4_pos { grid-column: 7 / span 2; grid-row: 3 / span 2; font-size: 14px;}
 
 /* Posicion celdas del tablero */
 .start_cell_pos { grid-column: 2; grid-row: 1;}
@@ -33,7 +33,7 @@
 .prop12_cell_pos { grid-column: 2; grid-row: 2;}
 
 /* Posicion seccion de preguntas */
-.question_pos { grid-column: 3 / span 2; grid-row: 3; }
+.question_pos { grid-column: 3 / span 2; grid-row: 2 / span 2; }
 
 /* Posicion seccion del Dado */
 .dice_pos { grid-column: 5; grid-row: 3;}
@@ -52,11 +52,11 @@
 .player_4_sty { background-color: #59ABE3; text-align: right;}
 
 /* Estilo de celdas del tablero */
-.cell_sty { background-color: #FFFFFF; text-align: center;}
+.cell_sty { background-color: #FFFFFF; text-align: center; border-style: dotted; border-width: 0.5px;}
 .corner_cell_sty { background-color: #FF00FF; text-align: center;}
 
 /* Estilo de seccion de preguntas */
-.question_sty { background: #FF4500; text-align: center;}
+.question_sty { background: #FFB9AA; text-align: center; font-size: 10px;}
 
 /* Estilo del dado */
 .dice_sty { background: #FFDEAD; text-align: center;}
@@ -190,7 +190,7 @@ h2.centerh2heading {
   #wrap1 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
   #wrap1 img { 
     position: absolute; 
-/*    border: 0;*/
+    /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
@@ -198,10 +198,10 @@ h2.centerh2heading {
     transition: all 1s ease-out;
   }
 
-    #wrap2 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap2 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
   #wrap2 img { 
     position: absolute; 
-/*    border: 0;*/
+    /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
@@ -209,10 +209,10 @@ h2.centerh2heading {
     transition: all 1s ease-out;
   }
 
-    #wrap3 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap3 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
   #wrap3 img { 
     position: absolute; 
-/*    border: 0;*/
+    /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
@@ -220,10 +220,10 @@ h2.centerh2heading {
     transition: all 1s ease-out;
   }
 
-    #wrap4 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
+  #wrap4 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
   #wrap4 img { 
     position: absolute; 
-/*    border: 0;*/
+    /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
@@ -231,3 +231,41 @@ h2.centerh2heading {
     transition: all 1s ease-out;
   }
 
+/*  .tg th{
+    font-size: 8px;
+    border-collapse: collapse;
+  }
+
+  table.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0px;
+  }
+
+  .tg td {
+    border-collapse: collapse;
+    padding:0px; 
+    border-width:0px; 
+    margin:0px; 
+  }
+
+  .tg {
+    border-spacing: 0px;
+    border-collapse:collapse;  /* <--- add this so all the internal <td>s share adjacent borders  */
+/*    border:1px solid black;  
+  }
+*/
+
+  .tg th {
+    font-size: 7.5px;
+    border-spacing: 0px;  /* <---- won't really need this if you have border-collapse = collapse */
+    border-style:none; 
+  }
+
+  .tg tr {
+
+  }
+
+  .multipleChoice {
+    font-weight: bold;
+  }
