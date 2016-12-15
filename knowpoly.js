@@ -260,7 +260,7 @@ var chosenRandom;
 function change() {
   var random = Math.floor(Math.random()*6);
   dice.innerHTML = dices[random];
-  chosenRandom = random;
+  chosenRandom = random + 1;
 }
 
 function stopstart() {
@@ -272,7 +272,6 @@ function stopstart() {
     stopped = true;
     console.log(chosenRandom);
   }
-
 }
 
 
@@ -298,9 +297,14 @@ function mark_player_turn(id_player){
 	document.getElementById("player"+id_player).style.border = "thick solid #0000FF";
 }
 
-function roll_dice(){									// Espera a que el jugador toque el dado
+function demark_player_turn(id_player){
+	document.getElementById("player"+id_player).style.border = "none";
+}
+
+function roll_dice(_callback){									// Espera a que el jugador toque el dado
 		var lucky = Math.floor((Math.random() * 6) + 1);
 		return lucky;
+
 }
 
 function position_manager(dice_number, player_pos){				// Encargado de asignar entre las 16 posiciones posibles
@@ -376,6 +380,37 @@ function properties_manager(player_id, player_position){
 	}
 }
 
+var currentPlayer;
+var currentIndex;
+var pastPlayer;
+
+function gameOn(){
+	pastPlayer = currentPlayer;
+	stopstart();
+	movePlayerRight(chosenRandom,currentPlayer);
+
+	window.setTimeout(function () {
+
+		currentIndex += 1;
+
+		if (currentIndex == players.length) {
+			currentIndex = 0;
+		}
+		currentPlayer = players[currentIndex].id;
+		
+
+
+
+
+
+
+	alert("prueba");
+	stopstart();
+	demark_player_turn(pastPlayer);
+	mark_player_turn(currentPlayer);
+}, 1500);
+};
+
 
 
 function start_play(){
@@ -396,55 +431,61 @@ function start_play(){
 		properties_creator();
 		game_is_on = true;
 		new_position = 0;
-		while(game_is_on){
-			var counter = counter_active_players();
-			if(counter == 1){
-				// hay ganador
-			}else{
-				for(var i=0;i<players.length;++i){
-					mark_player_turn(players[i].id);					// Se resalta el jugador activo
-					new_position = position_manager(roll_dice(),players[i].current_position_board);
-					players[i].current_position_board = new_position;
 
-					// Una vez obtenido el numero, se actualiza la variable de posicion del
-					// jugador sumando la cuenta del dado, existen 16 posiciones
-
-					/*		Posiciones del tablero
-
-							0 = entrada
-							1 - 4 = propiedades
-							5 = silla caliente
-							6 - 7 = propiedades
-							8 = cueva
-							9 - 12 = propiedades
-							13 = silla caliente
-							14 - 15 = propiedades
-					*/
-
-					switch (new_position) {
-						case 0:
-							entrance_cell(players[i].id);
-							break;
-						case 5:
-							hot_chair_cell(players[i].id);
-							break;
-						case 8:
-							cave_cell(players[i].id);
-							break;
-						case 13:
-							hot_chair_cell(players[i].id);
-							break;
-						default:
-							properties_manager(players[i].id,new_position);
-							break;
-					}
+		currentPlayer = players[0].id;
+		currentIndex = 0;
+		mark_player_turn(players[currentIndex].id);
+		// while(game_is_on){
+		// 	var counter = counter_active_players();
+		// 	if(counter == 1){
+		// 		// hay ganador
+		// 	}else{
+		// 		for(var i=0;i<players.length;++i){
+		// 			mark_player_turn(players[i].id);					// Se resalta el jugador activo
 
 
-					game_is_on = false;
-					document.getElementById("finish_turn").disabled = false;
-				}
-			}
-		}
+		// 			new_position = position_manager(roll_dice(),players[i].current_position_board);
+		// 			players[i].current_position_board = new_position;
+
+		// 			// Una vez obtenido el numero, se actualiza la variable de posicion del
+		// 			// jugador sumando la cuenta del dado, existen 16 posiciones
+
+		// 					Posiciones del tablero
+
+		// 					0 = entrada
+		// 					1 - 4 = propiedades
+		// 					5 = silla caliente
+		// 					6 - 7 = propiedades
+		// 					8 = cueva
+		// 					9 - 12 = propiedades
+		// 					13 = silla caliente
+		// 					14 - 15 = propiedades
+					
+
+		// 			switch (new_position) {
+		// 				case 0:
+		// 					entrance_cell(players[i].id);
+		// 					break;
+		// 				case 5:
+		// 					hot_chair_cell(players[i].id);
+		// 					break;
+		// 				case 8:
+		// 					cave_cell(players[i].id);
+		// 					break;
+		// 				case 13:
+		// 					hot_chair_cell(players[i].id);
+		// 					break;
+		// 				default:
+		// 					properties_manager(players[i].id,new_position);
+		// 					break;
+		// 			}
+
+
+		// 			game_is_on = false;
+		// 			document.getElementById("finish_turn").disabled = false;
+		// 		}
+		// 	}
+		// }
 
 
 	}else{
