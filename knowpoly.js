@@ -5,9 +5,6 @@ var game_is_on = false;						// Indicador acerca de continuar o no el juego
 
 // *************************************************************
 
-// Funcion principal de corrida
-
-
 function getOffset(el) {
 	el = el.getBoundingClientRect();
 
@@ -25,25 +22,13 @@ playerIcons[0] = document.createElement('img');
 playerIcons[1] = document.createElement('img');
 playerIcons[2] = document.createElement('img');
 playerIcons[3] = document.createElement('img');
-// var player1 = document.createElement('img');
-// var player2 = document.createElement('img');
-// var player3 = document.createElement('img');
-// var player4 = document.createElement('img');
 
 function movePlayer(){
-	// var wrap = document.getElementById('wrap1');
-	// var img = document.createElement('img');
- //    img.src = 'images/ultraball.svg';
-    // wrap.appendChild(img);
 
     var wrap1 = document.getElementById('wrap1');
-
-
-    // Assume the bubble image dimensions and area dimensions
     var imgWidth = 40;
     var imgHeight = 40;
     var dimensions = getOffset(document.getElementById("casillaInicio"));
-	//var player = document.createElement('img');
 
 	playerIcons[0].src = 'images/ultraball.svg';
 	playerIcons[1].src = 'images/greatball.svg';
@@ -64,8 +49,6 @@ function movePlayer(){
 	playerIcons[1].setAttribute("width",imgWidth);
 	playerIcons[2].setAttribute("width",imgWidth);
 	playerIcons[3].setAttribute("width",imgWidth);
-	// player.style.top = (dimensions.top) + 'px';
- //    player.style.left = (imgWidth/2) + 'px';
 
  playerIcons[0].style.top = 5 + 'vh';
  playerIcons[1].style.top = 5 + 'vh';
@@ -94,28 +77,22 @@ function movePlayer(){
 }
 
 var imgWidth = 80;
-
 movePlayer();
 
 function movePlayerRight(spacesToMove, playerToMove){
 
 	var actualPlayer;
-
 	for(var i = 0; i < players.length; i++){
 		if (players[i].id == playerToMove) {
 			actualPlayer = players[i];
 			break;
 		}
 	}
-
 	var tmpLeft = playerIcons[playerToMove-1].style.left;
 	var left = tmpLeft.replace("px", "");
 	var tempTop = playerIcons[playerToMove-1].style.top;
-	// console.log(player.style.top);
 	var top = tempTop.replace("px", "");
-
 	var spacesLeft = spacesToMove;
-
 	positionX = parseInt(left);
 	positionY = parseInt(top);
 
@@ -126,23 +103,18 @@ function movePlayerRight(spacesToMove, playerToMove){
 			if (positionX + 20 < 120) {
 				positionX += 20;
 				spacesLeft -= 1;
-			// player.style.left = (parseInt(left)+20) + 'vh';
 		} else {
 			positionY += 20;
-			// player.style.top = (parseInt(top)+20) + 'vh';
 			actualPlayer.cycle = 2;
 			spacesLeft -= 1;
 		}
 		break;
-
 		case 2:
 		if (positionY + 20 < 80) {
 			positionY += 20;
 			spacesLeft -= 1;
-			// player.style.top = (parseInt(top)+20) + 'vh';
 		} else {
 			positionX -= 20;
-			// player.style.left = (parseInt(left)-20) + 'vh';
 			actualPlayer.cycle = 3;
 			spacesLeft -= 1;
 		}
@@ -152,10 +124,8 @@ function movePlayerRight(spacesToMove, playerToMove){
 		if (positionX - 20 >= 0) {
 			positionX -= 20;
 			spacesLeft -= 1;
-			// player.style.left = (parseInt(left)-20) + 'vh';
 		}else {
 			positionY -= 20;
-			// player.style.top = (parseInt(top)-20) + 'vh';
 			actualPlayer.cycle = 4;
 			spacesLeft -= 1;
 		}
@@ -165,10 +135,8 @@ function movePlayerRight(spacesToMove, playerToMove){
 		if (positionY - 20 >= 0) {
 			positionY -= 20;
 			spacesLeft -= 1;
-			// player.style.top = (parseInt(top)-20) + 'vh';
 		} else {
-			positionX += 20
-			// player.style.left = (parseInt(left)+20) + 'vh';
+			positionX += 20;
 			actualPlayer.cycle = 1;
 			spacesLeft -= 1;
 		}
@@ -180,21 +148,16 @@ function movePlayerRight(spacesToMove, playerToMove){
 }
 }
 
-
 function createPlayer(newName, newId) {
 	var newPlayer = {
 		id: newId,
 		name: newName,
 		liquid_money: 1000,
 		asset_liquid_money : 1000,
-
 		cycle: 1,
-
 		active_player : true,
 		current_position_board : 0,
-
 	};
-
 	return newPlayer;
 };
 
@@ -238,25 +201,6 @@ function newPlayer(newId){
 
 "use strict";
 
- // Funciones del dado
-
-// function dice_buttonFunc() {
-//     printNum(dice.roll());
-// }
-
-// function printNum(num) {
-//     document
-//         .getElementById('diceBox')
-//         .innerHTML = num;
-// }
-
-// var dice = {
-//     sides: 6,
-//     roll: function () {
-//         return Math.floor(Math.random() * this.sides) + 1;
-//     }
-// };
-
 var dice;
 var dices = ['&#9856;', '&#9857;', '&#9858;', '&#9859;', '&#9860;', '&#9861;' ];
 var stopped = true;
@@ -280,13 +224,6 @@ function stopstart() {
 		console.log(chosenRandom);
 	}
 }
-
-
-// window.onload = function() {
-//   dice = document.getElementById("dice");
-//   stopstart();
-// }
-// ***********************
 
 // ********* Funciones controladoras estado del juego **************
 
@@ -322,7 +259,7 @@ function build_house(id_property){
 	}
 }
 
-function build_demolish(id_property){
+function demolish(id_property){
 	for(var i=0; i<properties.length; ++i){
 		if(properties[i].property_number == id_property && properties[i].buildings > 0){
 			properties[i].buildings -= 1;
@@ -390,7 +327,6 @@ function demark_player_turn(id_player){
 function roll_dice(_callback){									// Espera a que el jugador toque el dado
 	var lucky = Math.floor((Math.random() * 6) + 1);
 	return lucky;
-
 }
 
 function position_manager(dice_number, player_pos){				// Encargado de asignar entre las 16 posiciones posibles
@@ -436,12 +372,10 @@ function entrance_cell(player_id){									// Se le acreditan 100 unidades al ju
 }
 
 function hot_chair_cell(player_id){
-	//alert("esta en silla caliente");
 	var dummy = 0;
 }
 
 function cave_cell(player_id){
-	//alert("esta en cueva");
 	var dummy = 0;
 }
 
@@ -494,7 +428,6 @@ function showQuestion(){
 		document.getElementById("respuesta5").style.visibility = "visible";
 	}
 
-
 	document.getElementById("textoPregunta").innerHTML = arr[0][currentQuestion].text;
 	document.getElementById("respuesta1").innerHTML = "1. " + arr[0][currentQuestion].options[0];
 	document.getElementById("respuesta2").innerHTML = "2. " + arr[0][currentQuestion].options[1];
@@ -510,9 +443,9 @@ function showQuestion(){
 
 function validateAnswer(playerAnswer){
 	if (playerAnswer == arr[0][currentQuestion].answer) {
-		alert("¡Respuesta correcta!");
+		alert("¡Respuesta correcta! Ganas dinero!!!");
 	} else {
-	alert("Respuesta incorrecta :(");
+	alert("Respuesta incorrecta :( Pierdes la mitad de dinero");
 	}
 
 	if (hotChair) {
@@ -537,6 +470,16 @@ function gameOn(){
 			entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
 		}
 		players[currentIndex].current_position_board = new_position;
+
+		// 					Posiciones del tablero
+		// 					0 = entrada
+		// 					1 - 4 = propiedades
+		// 					5 = silla caliente
+		// 					6 - 7 = propiedades
+		// 					8 = cueva
+		// 					9 - 12 = propiedades
+		// 					13 = silla caliente
+		// 					14 - 15 = propiedades
 
 		switch (new_position) {
 			case 0:
@@ -571,96 +514,24 @@ function gameOn(){
 		}
 		currentPlayer = players[currentIndex].id;
 
-<<<<<<< HEAD
 		stopstart();
-=======
->>>>>>> origin/master
-
 		demark_player_turn(pastPlayer);
 		mark_player_turn(currentPlayer);
 	}, 1500);
 };
 
-// var questionsArray = JSON.parse(questions);
-// console.log(questionsArray);
-
-
-
 function start_play(){
 	if(players.length >= 2){													// Juego activo
-
 		document.getElementById("start_game_button").hidden = true;
 		document.getElementById("finish_turn").disabled = false;
 		dice = document.getElementById("dice");
 		stopstart();
 		movePlayer();
-  		// for(var i = 0; i < 52; i++){
-  		// 	movePlayerRight();
-  		// }
-  		// animateMovePlayerRight();
-  		// movePlayerRight();
-
-  		properties_creator();
-  		//game_is_on = true;
-
-
-  		currentPlayer = players[0].id;
-  		currentIndex = 0;
-  		mark_player_turn(players[currentIndex].id);
-  		stopstart();
-		// while(game_is_on){
-		// 	var counter = counter_active_players();
-		// 	if(counter == 1){
-		// 		// hay ganador
-		// 	}else{
-		// 		for(var i=0;i<players.length;++i){
-		// 			mark_player_turn(players[i].id);					// Se resalta el jugador activo
-
-
-		// 			new_position = position_manager(roll_dice(),players[i].current_position_board);
-		// 			players[i].current_position_board = new_position;
-
-		// 			// Una vez obtenido el numero, se actualiza la variable de posicion del
-		// 			// jugador sumando la cuenta del dado, existen 16 posiciones
-
-		// 					Posiciones del tablero
-
-		// 					0 = entrada
-		// 					1 - 4 = propiedades
-		// 					5 = silla caliente
-		// 					6 - 7 = propiedades
-		// 					8 = cueva
-		// 					9 - 12 = propiedades
-		// 					13 = silla caliente
-		// 					14 - 15 = propiedades
-
-
-		// 			switch (new_position) {
-		// 				case 0:
-		// 					entrance_cell(players[i].id);
-		// 					break;
-		// 				case 5:
-		// 					hot_chair_cell(players[i].id);
-		// 					break;
-		// 				case 8:
-		// 					cave_cell(players[i].id);
-		// 					break;
-		// 				case 13:
-		// 					hot_chair_cell(players[i].id);
-		// 					break;
-		// 				default:
-		// 					properties_manager(players[i].id,new_position);
-		// 					break;
-		// 			}
-
-
-		// 			game_is_on = false;
-		// 			document.getElementById("finish_turn").disabled = false;
-		// 		}
-		// 	}
-		// }
-
-
+  	properties_creator();
+  	currentPlayer = players[0].id;
+  	currentIndex = 0;
+  	mark_player_turn(players[currentIndex].id);
+  	stopstart();
 	}else{
 		alert("Son necesarios dos o más jugadores para iniciar la partida.");
 	}
