@@ -186,7 +186,7 @@ function createPlayer(newName, newId) {
 		id: newId,
 		name: newName,
 		liquid_money: 1000,
-		asset_liquid_money : 2000,
+		asset_liquid_money : 1000,
 
 		cycle: 1,
 
@@ -198,11 +198,17 @@ function createPlayer(newName, newId) {
 	return newPlayer;
 };
 
-function createProperty(newName, newValue, newId) {
+function createProperty(newName, newValue, newId,sale,b_buy,b_sale,morgages,number) {
 	var newProperty = {
 		name : newName,
 		value: newValue,
 		owner: newId,
+		buildings: 0,
+		sale_value: sale,
+		building_buy: b_buy,
+		building_sale: b_sale,
+		morgage_prices: morgages,
+		property_number: number,
 	};
 	return newProperty;
 };
@@ -283,15 +289,82 @@ function stopstart() {
 
 // ********* Funciones controladoras estado del juego **************
 
+function sell_property(id_property){
+	owner_id = 0;
+	for(var i=0; i<properties.length; ++i)	{
+		if(properties[i].property_number == id_property){
+			owner_id = properties[i].owner;
+			for(var j=0; j<players.length; ++j){
+				if(players[j].id == owner_id){
+					players[j].liquid_money += properties[i].sale_value;			// Se aumenta el dinero del dueno
+				}
+			}
+			properties[i].owner = 666;																		// Se modifica el dueno al banco
+		}
+	}
+}
+
+function build_house(id_property){
+	owner_id = 0;
+	for(var i=0; i<properties.length; ++i){
+		if(properties[i].property_number == id_property){
+			properties[i].buildings += 1;																// Se agrega una casa
+			owner_id = properties[i].owner;
+			for(var j=0; j<players.length; ++j){												// Se aumenta el valor de activos del dueno y reduce efectivo
+				if(players[j].id == owner_id){
+					players[j].liquid_money -= properties[i].building_buy;
+					players[j].asset_liquid_money -= properties[i].building_buy;
+					players[j].asset_liquid_money += properties[i].building_sale;
+				}
+			}
+		}
+	}
+}
+
+function build_demolish(id_property){
+	for(var i=0; i<properties.length; ++i){
+		if(properties[i].property_number == id_property && properties[i].buildings > 0){
+			properties[i].buildings -= 1;
+			owner_id = properties[i].owner;
+			for(var j=0; j<players.length; ++j){												// Se aumenta el efectivo, el valor de activos sigue igual
+				if(players[j].id == owner_id){
+					players[j].liquid_money += properties[i].building_sale;
+				}
+			}
+		}
+	}
+}
+
+function pay_morgage(paying_player_id,player_position){
+	owner_id = properties[player_position].owner;
+	built_houses = properties[player_position].buildings;
+	if(owner_id == paying_player_id){
+		alert(" ¡¡ Se encuentra de visita en su propiedad !!");
+	}else{
+		alert("Bienvenido, debe pagar "+properties[player_position].morgage_prices[built_houses]+" de renta en esta propiedad.");
+	}
+
+	for(var i=0; i<players.length;++i){
+		if(players[i].id == paying_player_id){
+			players[i].liquid_money -= properties[player_position].morgage_prices[built_houses];
+			players[i].asset_liquid_money -= properties[player_position].morgage_prices[built_houses];
+		}
+	}
+	for(var j=0; j<players.length;++j){
+		if(players[j].id == owner_id){
+			players[j].liquid_money += properties[player_position].morgage_prices[built_houses];
+			players[j].asset_liquid_money += properties[player_position].morgage_prices[built_houses];
+		}
+	}
+}
+
 function refresh_player_money(player_id){
 	for(var i=0; i<players.length;++i){
-		if(players[i].id == player_id){
-			var innerdiv = document.getElementById("player_"+player_id+"_points");
+			var innerdiv = document.getElementById("player_"+players[i].id+"_points");
 			innerdiv.innerHTML = players[i].liquid_money+"/"+players[i].asset_liquid_money;
-			var outerdiv = document.getElementById("player" + player_id);
+			var outerdiv = document.getElementById("player" + players[i].id);
 			outerdiv.innerHTML = players[i].name;
 			outerdiv.appendChild(innerdiv);
-		}
 	}
 }
 
@@ -332,22 +405,22 @@ function position_manager(dice_number, player_pos){				// Encargado de asignar e
 }
 
 function properties_creator(){
-	properties[0] = createProperty("Entrada",0,333);
-	properties[1] = createProperty("Propiedad 1",50,666);
-	properties[2] = createProperty("Propiedad 2",60,666);
-	properties[3] = createProperty("Propiedad 3",75,666);
-	properties[4] = createProperty("Propiedad 4",85,666);
-	properties[5] = createProperty("Silla 1",0,333);
-	properties[6] = createProperty("Propiedad 5",105,666);
-	properties[7] = createProperty("Propiedad 6",115,666);
-	properties[8] = createProperty("Cueva",0,333);
-	properties[9] = createProperty("Propiedad 7",135,666);
-	properties[10] = createProperty("Propiedad 8",145,666);
-	properties[11] = createProperty("Propiedad 9",160,666);
-	properties[12] = createProperty("Propiedad 10",170,666);
-	properties[13] = createProperty("Silla 2",0,333);
-	properties[14] = createProperty("Propiedad 11",190,666);
-	properties[15] = createProperty("Propiedad 12",200,666);
+	properties[0] = createProperty("Entrada",0,333,0,0,0,0,13);
+	properties[1] = createProperty("Propiedad 1",50,666,45,50,25,[5,15,45,125,250,400],1);
+	properties[2] = createProperty("Propiedad 2",60,666,55,50,25,[6,20,55,150,300,480],2);
+	properties[3] = createProperty("Propiedad 3",75,666,70,75,40,[8,25,70,200,400,640],3);
+	properties[4] = createProperty("Propiedad 4",85,666,75,75,40,[9,25,80,225,450,720],4);
+	properties[5] = createProperty("Silla 1",0,333,0,0,0,0,14);
+	properties[6] = createProperty("Propiedad 5",105,666,95,100,50,[11,35,100,275,550,880],5);
+	properties[7] = createProperty("Propiedad 6",115,666,105,100,50,[12,35,110,300,600,960],6);
+	properties[8] = createProperty("Cueva",0,333,0,0,0,0,15);
+	properties[9] = createProperty("Propiedad 7",135,666,120,150,75,[15,45,135,375,750,1200],7);
+	properties[10] = createProperty("Propiedad 8",145,666,130,150,75,[16,50,145,400,800,1280],8);
+	properties[11] = createProperty("Propiedad 9",160,666,145,175,90,[18,55,160,450,900,1440],9);
+	properties[12] = createProperty("Propiedad 10",170,666,155,175,90,[20,60,180,500,1000,1600],10);
+	properties[13] = createProperty("Silla 2",0,333,0,0,0,0,16);
+	properties[14] = createProperty("Propiedad 11",190,666,170,200,100,[23,70,205,575,1150,1840],11);
+	properties[15] = createProperty("Propiedad 12",200,666,180,200,100,[25,75,225,625,1250,2000],12);
 }
 
 // ** Funciones celdas del tablero
@@ -356,6 +429,7 @@ function entrance_cell(player_id){									// Se le acreditan 100 unidades al ju
 	for(var i=0; i < players.length; ++i){
 		if(players[i].id == player_id){
 			players[i].liquid_money += 100;
+			players[i].asset_liquid_money += 100;
 		}
 	}
 }
@@ -375,19 +449,20 @@ function properties_manager(player_id, player_position){
 		if(players[i].id == player_id){
 			if(properties[player_position].owner == 666){
 				if(players[i].liquid_money >= properties[player_position].value){
-					if( confirm("Le gustaría comprar la "+properties[player_position].name) ){
-						alert("El jugador "+players[i].name+" tiene de dinero: "+players[i].liquid_money);
+					if( confirm("¿ Le gustaría comprar la "+properties[player_position].name+" ?") ){
 						properties[player_position].owner = player_id;
 						players[i].liquid_money -= properties[player_position].value;
-						alert("El costo de la propiedad es de: "+properties[player_position].value);
-						alert("El jugador "+players[i].name+" ahora tiene de dinero: "+players[i].liquid_money);
-						refresh_player_money(player_id);
+						players[i].asset_liquid_money -= properties[player_position].value;
+						players[i].asset_liquid_money += properties[player_position].sale_value;
+						//alert("El costo de la propiedad es de: "+properties[player_position].value);
+						alert(players[i].name+" ha adquirido la "+properties[player_position].name+"!! SU IMPERIO CRECE!!");
 					}
 				}else{
 					alert("No posee dinero suficiente para comprar la "+properties[player_position].name);
+					// debe habilitarse la opcion de construir
 				}
 			}else{
-				alert("La propiedad tiene dueño, no puede comprarla");
+				pay_morgage(players[i].id,player_position);
 			}
 		}
 	}
@@ -406,6 +481,9 @@ function gameOn(){
 	window.setTimeout(function () {
 
 		new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
+		if(new_position < players[currentIndex].current_position_board && new_position != 0){					// Si el jugador pasa por la entrada y no cae en ella
+			entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
+		}
 		players[currentIndex].current_position_board = new_position;
 
 		switch (new_position) {
@@ -426,6 +504,8 @@ function gameOn(){
 			break;
 		}
 
+		refresh_player_money();
+
 		currentIndex += 1;
 
 		if (currentIndex == players.length) {
@@ -433,13 +513,6 @@ function gameOn(){
 		}
 		currentPlayer = players[currentIndex].id;
 
-
-
-
-
-
-
-		alert("prueba");
 		stopstart();
 
 		demark_player_turn(pastPlayer);
