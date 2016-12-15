@@ -9,14 +9,14 @@ var game_is_on = false;						// Indicador acerca de continuar o no el juego
 
 
 function getOffset(el) {
-  el = el.getBoundingClientRect();
+	el = el.getBoundingClientRect();
 
-  return {
-    left: el.left + window.scrollX,
-    top: el.top + window.scrollY,
-	height: el.height,
-	width: el.width
-  }
+	return {
+		left: el.left + window.scrollX,
+		top: el.top + window.scrollY,
+		height: el.height,
+		width: el.width
+	}
 }
 
 var playerIcons = new Array(4);
@@ -42,7 +42,7 @@ function movePlayer(){
     // Assume the bubble image dimensions and area dimensions
     var imgWidth = 40;
     var imgHeight = 40;
-	var dimensions = getOffset(document.getElementById("casillaInicio"));
+    var dimensions = getOffset(document.getElementById("casillaInicio"));
 	//var player = document.createElement('img');
 
 	playerIcons[0].src = 'images/ultraball.svg';
@@ -60,37 +60,37 @@ function movePlayer(){
 	playerIcons[2].setAttribute("height",imgHeight);
 	playerIcons[3].setAttribute("height",imgHeight);
 
-    playerIcons[0].setAttribute("width",imgWidth);
-    playerIcons[1].setAttribute("width",imgWidth);
-    playerIcons[2].setAttribute("width",imgWidth);
-    playerIcons[3].setAttribute("width",imgWidth);
+	playerIcons[0].setAttribute("width",imgWidth);
+	playerIcons[1].setAttribute("width",imgWidth);
+	playerIcons[2].setAttribute("width",imgWidth);
+	playerIcons[3].setAttribute("width",imgWidth);
 	// player.style.top = (dimensions.top) + 'px';
  //    player.style.left = (imgWidth/2) + 'px';
 
- 	playerIcons[0].style.top = 0 + 'vh';
- 	playerIcons[1].style.top = 0 + 'vh';
- 	playerIcons[2].style.top = 0 + 'vh';
- 	playerIcons[3].style.top = 0 + 'vh';
+ playerIcons[0].style.top = 0 + 'vh';
+ playerIcons[1].style.top = 0 + 'vh';
+ playerIcons[2].style.top = 0 + 'vh';
+ playerIcons[3].style.top = 0 + 'vh';
 
-    playerIcons[0].style.left = 0 + 'vh';
-    playerIcons[1].style.left = 5 + 'vh';
-    playerIcons[2].style.left = 10 + 'vh';
-    playerIcons[3].style.left = 15 + 'vh';
+ playerIcons[0].style.left = 0 + 'vh';
+ playerIcons[1].style.left = 5 + 'vh';
+ playerIcons[2].style.left = 10 + 'vh';
+ playerIcons[3].style.left = 15 + 'vh';
 
-	wrap1.appendChild(playerIcons[0]);
-	wrap1.appendChild(playerIcons[1]);
-	wrap1.appendChild(playerIcons[2]);
-	wrap1.appendChild(playerIcons[3]);
+ wrap1.appendChild(playerIcons[0]);
+ wrap1.appendChild(playerIcons[1]);
+ wrap1.appendChild(playerIcons[2]);
+ wrap1.appendChild(playerIcons[3]);
 
-	playerIcons[0].style.visibility = "hidden";
-	playerIcons[1].style.visibility = "hidden";
-	playerIcons[2].style.visibility = "hidden";
-	playerIcons[3].style.visibility = "hidden";
+ playerIcons[0].style.visibility = "hidden";
+ playerIcons[1].style.visibility = "hidden";
+ playerIcons[2].style.visibility = "hidden";
+ playerIcons[3].style.visibility = "hidden";
 
-	for(var i = 0; i < players.length; i++){
-		var hideImg = document.getElementById("player" + (players[i].id) + "img");
-		hideImg.style.visibility = "visible";
-	}
+ for(var i = 0; i < players.length; i++){
+ 	var hideImg = document.getElementById("player" + (players[i].id) + "img");
+ 	hideImg.style.visibility = "visible";
+ }
 }
 
 var imgWidth = 80;
@@ -123,61 +123,61 @@ function movePlayerRight(spacesToMove, playerToMove){
 
 		switch(actualPlayer.cycle){
 			case 1:
-				if (positionX + 20 < 120) {
-					positionX += 20;
-					spacesLeft -= 1;
-			// player.style.left = (parseInt(left)+20) + 'vh';
-				} else {
-					positionY += 20;
-			// player.style.top = (parseInt(top)+20) + 'vh';
-					actualPlayer.cycle = 2;
-					spacesLeft -= 1;
-				}
-			break;
-
-			case 2:
-				if (positionY + 20 < 80) {
-					positionY += 20;
-					spacesLeft -= 1;
-			// player.style.top = (parseInt(top)+20) + 'vh';
-				} else {
-					positionX -= 20;
-			// player.style.left = (parseInt(left)-20) + 'vh';
-					actualPlayer.cycle = 3;
-					spacesLeft -= 1;
-				}
-			break;
-
-			case 3:
-				if (positionX - 20 >= 0) {
-				positionX -= 20;
+			if (positionX + 20 < 120) {
+				positionX += 20;
 				spacesLeft -= 1;
-			// player.style.left = (parseInt(left)-20) + 'vh';
-				}else {
-					positionY -= 20;
-			// player.style.top = (parseInt(top)-20) + 'vh';
-					actualPlayer.cycle = 4;
-					spacesLeft -= 1;
-				}
-			break;
-
-			case 4:
-				if (positionY - 20 >= 0) {
-					positionY -= 20;
-					spacesLeft -= 1;
-			// player.style.top = (parseInt(top)-20) + 'vh';
-				} else {
-					positionX += 20
 			// player.style.left = (parseInt(left)+20) + 'vh';
-					actualPlayer.cycle = 1;
-					spacesLeft -= 1;
-				}
-			break;
+		} else {
+			positionY += 20;
+			// player.style.top = (parseInt(top)+20) + 'vh';
+			actualPlayer.cycle = 2;
+			spacesLeft -= 1;
 		}
+		break;
 
-		playerIcons[playerToMove-1].style.left = positionX + 'vh';
-		playerIcons[playerToMove-1].style.top = positionY + 'vh';
+		case 2:
+		if (positionY + 20 < 80) {
+			positionY += 20;
+			spacesLeft -= 1;
+			// player.style.top = (parseInt(top)+20) + 'vh';
+		} else {
+			positionX -= 20;
+			// player.style.left = (parseInt(left)-20) + 'vh';
+			actualPlayer.cycle = 3;
+			spacesLeft -= 1;
+		}
+		break;
+
+		case 3:
+		if (positionX - 20 >= 0) {
+			positionX -= 20;
+			spacesLeft -= 1;
+			// player.style.left = (parseInt(left)-20) + 'vh';
+		}else {
+			positionY -= 20;
+			// player.style.top = (parseInt(top)-20) + 'vh';
+			actualPlayer.cycle = 4;
+			spacesLeft -= 1;
+		}
+		break;
+
+		case 4:
+		if (positionY - 20 >= 0) {
+			positionY -= 20;
+			spacesLeft -= 1;
+			// player.style.top = (parseInt(top)-20) + 'vh';
+		} else {
+			positionX += 20
+			// player.style.left = (parseInt(left)+20) + 'vh';
+			actualPlayer.cycle = 1;
+			spacesLeft -= 1;
+		}
+		break;
 	}
+
+	playerIcons[playerToMove-1].style.left = positionX + 'vh';
+	playerIcons[playerToMove-1].style.top = positionY + 'vh';
+}
 }
 
 
@@ -258,20 +258,20 @@ var t;
 var chosenRandom;
 
 function change() {
-  var random = Math.floor(Math.random()*6);
-  dice.innerHTML = dices[random];
-  chosenRandom = random + 1;
+	var random = Math.floor(Math.random()*6);
+	dice.innerHTML = dices[random];
+	chosenRandom = random + 1;
 }
 
 function stopstart() {
-  if(stopped) {
-    stopped = false;
-    t = setInterval(change, 100);
-  } else {
-    clearInterval(t);
-    stopped = true;
-    console.log(chosenRandom);
-  }
+	if(stopped) {
+		stopped = false;
+		t = setInterval(change, 100);
+	} else {
+		clearInterval(t);
+		stopped = true;
+		console.log(chosenRandom);
+	}
 }
 
 
@@ -302,8 +302,8 @@ function demark_player_turn(id_player){
 }
 
 function roll_dice(_callback){									// Espera a que el jugador toque el dado
-		var lucky = Math.floor((Math.random() * 6) + 1);
-		return lucky;
+	var lucky = Math.floor((Math.random() * 6) + 1);
+	return lucky;
 
 }
 
@@ -320,42 +320,42 @@ function position_manager(dice_number, player_pos){				// Encargado de asignar e
 }
 
 function properties_creator(){
-		properties[0] = createProperty("Entrada",0,333);
-		properties[1] = createProperty("Propiedad 1",50,666);
-		properties[2] = createProperty("Propiedad 2",60,666);
-		properties[3] = createProperty("Propiedad 3",75,666);
-		properties[4] = createProperty("Propiedad 4",85,666);
-		properties[5] = createProperty("Silla 1",0,333);
-		properties[6] = createProperty("Propiedad 5",105,666);
-		properties[7] = createProperty("Propiedad 6",115,666);
-		properties[8] = createProperty("Cueva",0,333);
-		properties[9] = createProperty("Propiedad 7",135,666);
-		properties[10] = createProperty("Propiedad 8",145,666);
-		properties[11] = createProperty("Propiedad 9",160,666);
-		properties[12] = createProperty("Propiedad 10",170,666);
-		properties[13] = createProperty("Silla 2",0,333);
-		properties[14] = createProperty("Propiedad 11",190,666);
-		properties[15] = createProperty("Propiedad 12",200,666);
+	properties[0] = createProperty("Entrada",0,333);
+	properties[1] = createProperty("Propiedad 1",50,666);
+	properties[2] = createProperty("Propiedad 2",60,666);
+	properties[3] = createProperty("Propiedad 3",75,666);
+	properties[4] = createProperty("Propiedad 4",85,666);
+	properties[5] = createProperty("Silla 1",0,333);
+	properties[6] = createProperty("Propiedad 5",105,666);
+	properties[7] = createProperty("Propiedad 6",115,666);
+	properties[8] = createProperty("Cueva",0,333);
+	properties[9] = createProperty("Propiedad 7",135,666);
+	properties[10] = createProperty("Propiedad 8",145,666);
+	properties[11] = createProperty("Propiedad 9",160,666);
+	properties[12] = createProperty("Propiedad 10",170,666);
+	properties[13] = createProperty("Silla 2",0,333);
+	properties[14] = createProperty("Propiedad 11",190,666);
+	properties[15] = createProperty("Propiedad 12",200,666);
 }
 
 // ** Funciones celdas del tablero
 
 function entrance_cell(player_id){									// Se le acreditan 100 unidades al jugador
 	for(var i=0; i < players.length; ++i){
-			if(players[i].id == player_id){
-				players[i].liquid_money += 100;
-			}
+		if(players[i].id == player_id){
+			players[i].liquid_money += 100;
+		}
 	}
 }
 
 function hot_chair_cell(player_id){
 	//alert("esta en silla caliente");
-  var dummy = 0;
+	var dummy = 0;
 }
 
 function cave_cell(player_id){
 	//alert("esta en cueva");
-  var dummy = 0;
+	var dummy = 0;
 }
 
 function properties_manager(player_id, player_position){
@@ -383,6 +383,7 @@ function properties_manager(player_id, player_position){
 var currentPlayer;
 var currentIndex;
 var pastPlayer;
+var new_position = 0;
 
 function gameOn(){
 	pastPlayer = currentPlayer;
@@ -390,6 +391,27 @@ function gameOn(){
 	movePlayerRight(chosenRandom,currentPlayer);
 
 	window.setTimeout(function () {
+
+		new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
+		players[currentIndex].current_position_board = new_position;
+
+		switch (new_position) {
+			case 0:
+			entrance_cell(players[currentIndex].id);
+			break;
+			case 5:
+			hot_chair_cell(players[currentIndex].id);
+			break;
+			case 8:
+			cave_cell(players[currentIndex].id);
+			break;
+			case 13:
+			hot_chair_cell(players[currentIndex].id);
+			break;
+			default:
+			properties_manager(players[currentIndex].id,new_position);
+			break;
+		}
 
 		currentIndex += 1;
 
@@ -404,11 +426,12 @@ function gameOn(){
 
 
 
-	alert("prueba");
-	stopstart();
-	demark_player_turn(pastPlayer);
-	mark_player_turn(currentPlayer);
-}, 1500);
+		alert("prueba");
+		stopstart();
+		
+		demark_player_turn(pastPlayer);
+		mark_player_turn(currentPlayer);
+	}, 1500);
 };
 
 
@@ -420,21 +443,21 @@ function start_play(){
 
 		document.getElementById("finish_turn").disabled = false;
 		dice = document.getElementById("dice");
-  		stopstart();
-  		movePlayer();
+		stopstart();
+		movePlayer();
   		// for(var i = 0; i < 52; i++){
   		// 	movePlayerRight();
   		// }
   		// animateMovePlayerRight();
   		// movePlayerRight();
 
-		properties_creator();
-		game_is_on = true;
-		new_position = 0;
+  		properties_creator();
+  		game_is_on = true;
+  		
 
-		currentPlayer = players[0].id;
-		currentIndex = 0;
-		mark_player_turn(players[currentIndex].id);
+  		currentPlayer = players[0].id;
+  		currentIndex = 0;
+  		mark_player_turn(players[currentIndex].id);
 		// while(game_is_on){
 		// 	var counter = counter_active_players();
 		// 	if(counter == 1){
@@ -460,7 +483,7 @@ function start_play(){
 		// 					9 - 12 = propiedades
 		// 					13 = silla caliente
 		// 					14 - 15 = propiedades
-					
+		
 
 		// 			switch (new_position) {
 		// 				case 0:
