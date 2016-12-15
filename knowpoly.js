@@ -283,6 +283,18 @@ function stopstart() {
 
 // ********* Funciones controladoras estado del juego **************
 
+function refresh_player_money(player_id){
+	for(var i=0; i<players.length;++i){
+		if(players[i].id == player_id){
+			var innerdiv = document.getElementById("player_"+player_id+"_points");
+			innerdiv.innerHTML = players[i].liquid_money+"/"+players[i].asset_liquid_money;
+			var outerdiv = document.getElementById("player" + player_id);
+			outerdiv.innerHTML = players[i].name;
+			outerdiv.appendChild(innerdiv);
+		}
+	}
+}
+
 function counter_active_players(){
 	var counter = 0;
 	for(var i=0; i<players.length;++i){
@@ -369,6 +381,7 @@ function properties_manager(player_id, player_position){
 						players[i].liquid_money -= properties[player_position].value;
 						alert("El costo de la propiedad es de: "+properties[player_position].value);
 						alert("El jugador "+players[i].name+" ahora tiene de dinero: "+players[i].liquid_money);
+						refresh_player_money(player_id);
 					}
 				}else{
 					alert("No posee dinero suficiente para comprar la "+properties[player_position].name);
@@ -419,7 +432,7 @@ function gameOn(){
 			currentIndex = 0;
 		}
 		currentPlayer = players[currentIndex].id;
-		
+
 
 
 
@@ -428,7 +441,7 @@ function gameOn(){
 
 		alert("prueba");
 		stopstart();
-		
+
 		demark_player_turn(pastPlayer);
 		mark_player_turn(currentPlayer);
 	}, 1500);
@@ -440,7 +453,6 @@ function start_play(){
 	if(players.length >= 2){													// Juego activo
 
 		document.getElementById("start_game_button").hidden = true;
-
 		document.getElementById("finish_turn").disabled = false;
 		dice = document.getElementById("dice");
 		stopstart();
@@ -452,8 +464,8 @@ function start_play(){
   		// movePlayerRight();
 
   		properties_creator();
-  		game_is_on = true;
-  		
+  		//game_is_on = true;
+
 
   		currentPlayer = players[0].id;
   		currentIndex = 0;
@@ -483,7 +495,7 @@ function start_play(){
 		// 					9 - 12 = propiedades
 		// 					13 = silla caliente
 		// 					14 - 15 = propiedades
-		
+
 
 		// 			switch (new_position) {
 		// 				case 0:
