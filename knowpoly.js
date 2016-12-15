@@ -1,7 +1,7 @@
 
 var players = new Array();
 var properties = new Array(16);		// Se incluyen las celdas con funciones del tablero
-var game_is_on = false;						// Indicador acerca de continuar o no el juego
+var finished_turn = true;				// No permite a un nuevo jugador continuar si el anterior no termina su turno
 
 // *************************************************************
 
@@ -458,66 +458,78 @@ function validateAnswer(playerAnswer){
 	}
 }
 
+function player_finished(){
+	finished_turn = true;
+	demark_player_turn(pastPlayer);
+	mark_player_turn(currentPlayer);
+}
+
 function gameOn(){
-	pastPlayer = currentPlayer;
-	stopstart();
-	movePlayerRight(chosenRandom,currentPlayer);
-	document.getElementById("dice").style.pointerEvents = "none";
-	window.setTimeout(function () {
-
-		new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
-		if(new_position < players[currentIndex].current_position_board && new_position != 0){					// Si el jugador pasa por la entrada y no cae en ella
-			entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
-		}
-		players[currentIndex].current_position_board = new_position;
-
-		// 					Posiciones del tablero
-		// 					0 = entrada
-		// 					1 - 4 = propiedades
-		// 					5 = silla caliente
-		// 					6 - 7 = propiedades
-		// 					8 = cueva
-		// 					9 - 12 = propiedades
-		// 					13 = silla caliente
-		// 					14 - 15 = propiedades
-
-		switch (new_position) {
-			case 0:
-			entrance_cell(players[currentIndex].id);
-			break;
-			case 5:
-			hot_chair_cell(players[currentIndex].id);
-			hotChair = true;
-			showQuestion();
-			break;
-			case 8:
-			cave_cell(players[currentIndex].id);
-			hotChair = false;
-			showQuestion();
-			break;
-			case 13:
-			hot_chair_cell(players[currentIndex].id);
-			hotChair = true;
-			showQuestion();
-			break;
-			default:
-			properties_manager(players[currentIndex].id,new_position);
-			break;
-		}
-
-		refresh_player_money();
-
-		currentIndex += 1;
-
-		if (currentIndex == players.length) {
-			currentIndex = 0;
-		}
-		currentPlayer = players[currentIndex].id;
-
+	if(finished_turn){
+		pastPlayer = currentPlayer;
 		stopstart();
-		demark_player_turn(pastPlayer);
-		mark_player_turn(currentPlayer);
-	}, 1500);
+		movePlayerRight(chosenRandom,currentPlayer);
+		document.getElementById("dice").style.pointerEvents = "none";
+		window.setTimeout(function () {
+
+			new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
+			if(new_position < players[currentIndex].current_position_board && new_position != 0){					// Si el jugador pasa por la entrada y no cae en ella
+				entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
+			}
+			players[currentIndex].current_position_board = new_position;
+
+			// 					Posiciones del tablero
+			// 					0 = entrada
+			// 					1 - 4 = propiedades
+			// 					5 = silla caliente
+			// 					6 - 7 = propiedades
+			// 					8 = cueva
+			// 					9 - 12 = propiedades
+			// 					13 = silla caliente
+			// 					14 - 15 = propiedades
+
+			switch (new_position) {
+				case 0:
+				entrance_cell(players[currentIndex].id);
+				break;
+				case 5:
+				hot_chair_cell(players[currentIndex].id);
+				hotChair = true;
+				showQuestion();
+				break;
+				case 8:
+				cave_cell(players[currentIndex].id);
+				hotChair = false;
+				showQuestion();
+				break;
+				case 13:
+				hot_chair_cell(players[currentIndex].id);
+				hotChair = true;
+				showQuestion();
+				break;
+				default:
+				properties_manager(players[currentIndex].id,new_position);
+				break;
+			}
+
+			refresh_player_money();
+
+			currentIndex += 1;
+
+			if (currentIndex == players.length) {
+				currentIndex = 0;
+			}
+			currentPlayer = players[currentIndex].id;
+
+			stopstart();
+			finished_turn = false;
+			//demark_player_turn(pastPlayer);
+			//mark_player_turn(currentPlayer);
+		}, 1500);
+	}else{
+		alert("El jugador debe terminar su turno !!! ");
+	}
+
 };
 
 function start_play(){

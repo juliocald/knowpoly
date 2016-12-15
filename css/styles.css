@@ -107,7 +107,6 @@ li.verticalList {
   display:list-item;
 }
 
-
 body
 {
  font-family: "Lucida Grande", sans-serif;
@@ -149,11 +148,6 @@ h2.centerh2heading {
   text-align: center;
 }
 
-/** {
-  text-align: center;
-  background-color: #0bb749;
-  }*/
-
   #diceBox {
     height: 35px;
     width: 80px;
@@ -188,8 +182,8 @@ h2.centerh2heading {
   }
 
   #wrap1 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
-  #wrap1 img { 
-    position: absolute; 
+  #wrap1 img {
+    position: absolute;
     /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -199,8 +193,8 @@ h2.centerh2heading {
   }
 
   #wrap2 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
-  #wrap2 img { 
-    position: absolute; 
+  #wrap2 img {
+    position: absolute;
     /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -210,8 +204,8 @@ h2.centerh2heading {
   }
 
   #wrap3 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
-  #wrap3 img { 
-    position: absolute; 
+  #wrap3 img {
+    position: absolute;
     /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -221,8 +215,8 @@ h2.centerh2heading {
   }
 
   #wrap4 { width: 100%; height: 100%; margin: 0 auto; position: relative; }
-  #wrap4 img { 
-    position: absolute; 
+  #wrap4 img {
+    position: absolute;
     /*    border: 0;*/
 /*    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -244,22 +238,22 @@ h2.centerh2heading {
 
   .tg td {
     border-collapse: collapse;
-    padding:0px; 
-    border-width:0px; 
-    margin:0px; 
+    padding:0px;
+    border-width:0px;
+    margin:0px;
   }
 
   .tg {
     border-spacing: 0px;
     border-collapse:collapse;  /* <--- add this so all the internal <td>s share adjacent borders  */
-/*    border:1px solid black;  
+/*    border:1px solid black;
   }
 */
 
   .tg th {
     font-size: 7.5px;
     border-spacing: 0px;  /* <---- won't really need this if you have border-collapse = collapse */
-    border-style:none; 
+    border-style:none;
   }
 
   .tg tr {
