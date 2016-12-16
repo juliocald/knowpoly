@@ -241,6 +241,7 @@ function sell_property(id_property){
 			alert("Se ha vendido la propiedad al banco, su dinero se depositará en su cuenta.");
 		}
 	}
+	refresh_player_money();
 }
 
 function build_house(id_property){
@@ -265,6 +266,7 @@ function build_house(id_property){
 			}
 		}
 	}
+	refresh_player_money();
 }
 
 function demolish(id_property){
@@ -284,6 +286,7 @@ function demolish(id_property){
 				}
 			}
 	}
+	refresh_player_money();
 }
 
 function pay_morgage(paying_player_id,player_position){
