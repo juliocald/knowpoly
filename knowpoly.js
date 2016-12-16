@@ -1,7 +1,7 @@
 
 var players = new Array();
 var properties = new Array(16);		// Se incluyen las celdas con funciones del tablero
-var finished_turn = true;				// No permite a un nuevo jugador continuar si el anterior no termina su turno
+//var finished_turn = true;				// No permite a un nuevo jugador continuar si el anterior no termina su turno
 
 // *************************************************************
 
@@ -324,11 +324,6 @@ function demark_player_turn(id_player){
 	document.getElementById("player"+id_player).style.border = "none";
 }
 
-function roll_dice(_callback){									// Espera a que el jugador toque el dado
-	var lucky = Math.floor((Math.random() * 6) + 1);
-	return lucky;
-}
-
 function position_manager(dice_number, player_pos){				// Encargado de asignar entre las 16 posiciones posibles
 	while(dice_number > 0){
 		if(player_pos == 15){
@@ -459,19 +454,44 @@ function validateAnswer(playerAnswer){
 }
 
 function player_finished(){
-	finished_turn = true;
 	demark_player_turn(pastPlayer);
 	mark_player_turn(currentPlayer);
+	deactivate_property_buttons();
+}
+
+function activate_property_button(player_id){
+			for(var j=0; j < properties.length; ++j){				// Inspeccion a las propiedades
+				if(properties[j].owner == player_id){
+					var demolish = document.getElementById('demolish'+properties[j].property_number+'.1');
+					var build = document.getElementById('build'+properties[j].property_number+'.2');
+					var sell = document.getElementById('sell'+properties[j].property_number+'.3');
+					demolish.style.visibility = 'visible';
+					build.style.visibility = 'visible';
+					sell.style.visibility = 'visible';
+				}
+			}
+}
+
+function deactivate_property_buttons(){
+	for(var j=1; j < 13; ++j){				// Inspeccion a las propiedades
+		//console.log('demolish'+j+'.1');
+		//console.log(demolish);
+		document.getElementById('build'+j+'.2').style.visibility = 'hidden';
+		document.getElementById('sell'+j+'.3').style.visibility = 'hidden';
+		document.getElementById('demolish'+j+'.1').style.visibility = 'hidden';
+	}
 }
 
 function gameOn(){
-	if(finished_turn){
+	//if(finished_turn){
 		pastPlayer = currentPlayer;
 		stopstart();
 		movePlayerRight(chosenRandom,currentPlayer);
 		document.getElementById("dice").style.pointerEvents = "none";
+		activate_property_button(currentPlayer);
 		window.setTimeout(function () {
 
+			//deactivate_property_buttons();
 			new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
 			if(new_position < players[currentIndex].current_position_board && new_position != 0){					// Si el jugador pasa por la entrada y no cae en ella
 				entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
@@ -513,7 +533,7 @@ function gameOn(){
 			}
 
 			refresh_player_money();
-
+			activate_property_button(currentPlayer);
 			currentIndex += 1;
 
 			if (currentIndex == players.length) {
@@ -521,14 +541,13 @@ function gameOn(){
 			}
 			currentPlayer = players[currentIndex].id;
 
-			stopstart();
-			finished_turn = false;
-			//demark_player_turn(pastPlayer);
-			//mark_player_turn(currentPlayer);
+//			stopstart();
+	//		finished_turn = false;
+
 		}, 1500);
-	}else{
-		alert("El jugador debe terminar su turno !!! ");
-	}
+	//}else{
+		//alert("El jugador debe terminar su turno !!! ");
+	//}
 
 };
 
@@ -540,6 +559,7 @@ function start_play(){
 		stopstart();
 		movePlayer();
   	properties_creator();
+		deactivate_property_buttons();
   	currentPlayer = players[0].id;
   	currentIndex = 0;
   	mark_player_turn(players[currentIndex].id);
