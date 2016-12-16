@@ -25,10 +25,10 @@ playerIcons[3] = document.createElement('img');
 
 function movePlayer(){
 
-    var wrap1 = document.getElementById('wrap1');
-    var imgWidth = 40;
-    var imgHeight = 40;
-    var dimensions = getOffset(document.getElementById("casillaInicio"));
+	var wrap1 = document.getElementById('wrap1');
+	var imgWidth = 40;
+	var imgHeight = 40;
+	var dimensions = getOffset(document.getElementById("casillaInicio"));
 
 	playerIcons[0].src = 'images/ultraball.svg';
 	playerIcons[1].src = 'images/greatball.svg';
@@ -50,30 +50,30 @@ function movePlayer(){
 	playerIcons[2].setAttribute("width",imgWidth);
 	playerIcons[3].setAttribute("width",imgWidth);
 
- playerIcons[0].style.top = 5 + 'vh';
- playerIcons[1].style.top = 5 + 'vh';
- playerIcons[2].style.top = 5 + 'vh';
- playerIcons[3].style.top = 5 + 'vh';
+	playerIcons[0].style.top = 5 + 'vh';
+	playerIcons[1].style.top = 5 + 'vh';
+	playerIcons[2].style.top = 5 + 'vh';
+	playerIcons[3].style.top = 5 + 'vh';
 
- playerIcons[0].style.left = 0 + 'vh';
- playerIcons[1].style.left = 5 + 'vh';
- playerIcons[2].style.left = 10 + 'vh';
- playerIcons[3].style.left = 15 + 'vh';
+	playerIcons[0].style.left = 0 + 'vh';
+	playerIcons[1].style.left = 5 + 'vh';
+	playerIcons[2].style.left = 10 + 'vh';
+	playerIcons[3].style.left = 15 + 'vh';
 
- wrap1.appendChild(playerIcons[0]);
- wrap1.appendChild(playerIcons[1]);
- wrap1.appendChild(playerIcons[2]);
- wrap1.appendChild(playerIcons[3]);
+	wrap1.appendChild(playerIcons[0]);
+	wrap1.appendChild(playerIcons[1]);
+	wrap1.appendChild(playerIcons[2]);
+	wrap1.appendChild(playerIcons[3]);
 
- playerIcons[0].style.visibility = "hidden";
- playerIcons[1].style.visibility = "hidden";
- playerIcons[2].style.visibility = "hidden";
- playerIcons[3].style.visibility = "hidden";
+	playerIcons[0].style.visibility = "hidden";
+	playerIcons[1].style.visibility = "hidden";
+	playerIcons[2].style.visibility = "hidden";
+	playerIcons[3].style.visibility = "hidden";
 
- for(var i = 0; i < players.length; i++){
- 	var hideImg = document.getElementById("player" + (players[i].id) + "img");
- 	hideImg.style.visibility = "visible";
- }
+	for(var i = 0; i < players.length; i++){
+		var hideImg = document.getElementById("player" + (players[i].id) + "img");
+		hideImg.style.visibility = "visible";
+	}
 }
 
 var imgWidth = 80;
@@ -103,49 +103,49 @@ function movePlayerRight(spacesToMove, playerToMove){
 			if (positionX + 20 < 120) {
 				positionX += 20;
 				spacesLeft -= 1;
-		} else {
-			positionY += 20;
-			actualPlayer.cycle = 2;
-			spacesLeft -= 1;
-		}
-		break;
-		case 2:
-		if (positionY + 20 < 80) {
-			positionY += 20;
-			spacesLeft -= 1;
-		} else {
-			positionX -= 20;
-			actualPlayer.cycle = 3;
-			spacesLeft -= 1;
-		}
-		break;
+			} else {
+				positionY += 20;
+				actualPlayer.cycle = 2;
+				spacesLeft -= 1;
+			}
+			break;
+			case 2:
+			if (positionY + 20 < 80) {
+				positionY += 20;
+				spacesLeft -= 1;
+			} else {
+				positionX -= 20;
+				actualPlayer.cycle = 3;
+				spacesLeft -= 1;
+			}
+			break;
 
-		case 3:
-		if (positionX - 20 >= 0) {
-			positionX -= 20;
-			spacesLeft -= 1;
-		}else {
-			positionY -= 20;
-			actualPlayer.cycle = 4;
-			spacesLeft -= 1;
-		}
-		break;
+			case 3:
+			if (positionX - 20 >= 0) {
+				positionX -= 20;
+				spacesLeft -= 1;
+			}else {
+				positionY -= 20;
+				actualPlayer.cycle = 4;
+				spacesLeft -= 1;
+			}
+			break;
 
-		case 4:
-		if (positionY - 20 >= 0) {
-			positionY -= 20;
-			spacesLeft -= 1;
-		} else {
-			positionX += 20;
-			actualPlayer.cycle = 1;
-			spacesLeft -= 1;
+			case 4:
+			if (positionY - 20 >= 0) {
+				positionY -= 20;
+				spacesLeft -= 1;
+			} else {
+				positionX += 20;
+				actualPlayer.cycle = 1;
+				spacesLeft -= 1;
+			}
+			break;
 		}
-		break;
+
+		playerIcons[playerToMove-1].style.left = positionX + 'vh';
+		playerIcons[playerToMove-1].style.top = positionY + 'vh';
 	}
-
-	playerIcons[playerToMove-1].style.left = positionX + 'vh';
-	playerIcons[playerToMove-1].style.top = positionY + 'vh';
-}
 }
 
 function createPlayer(newName, newId) {
@@ -157,6 +157,7 @@ function createPlayer(newName, newId) {
 		cycle: 1,
 		active_player : true,
 		current_position_board : 0,
+		poisoned : false,
 	};
 	return newPlayer;
 };
@@ -250,8 +251,10 @@ function build_house(id_property){
 	for(var i=0; i<properties.length; ++i){
 		if(properties[i].property_number == id_property ){
 			owner_id = properties[i].owner;
-			if(properties[i].buildings < 5){
-				properties[i].buildings += 1;																// Se agrega una casa
+			if(properties[i].buildings <= 5){
+				properties[i].buildings += 1;
+				document.getElementById(id_property + "casa" + properties[i].buildings).style.backgroundColor = "#33FDFF";				
+																				// Se agrega una casa
 				for(var j=0; j<players.length; ++j){												// Se aumenta el valor de activos del dueno y reduce efectivo
 					if(players[j].id == owner_id){
 						players[j].liquid_money -= properties[i].building_buy;
@@ -272,10 +275,11 @@ function build_house(id_property){
 function demolish(id_property){
 	for(var i=0; i<properties.length; ++i){
 		if(properties[i].property_number == id_property){
-				if(properties[i].buildings > 0){
-					properties[i].buildings -= 1;
-					owner_id = properties[i].owner;
-					alert("Ha demolido una casa de la propiedad, el banco le pagará los dividendos");
+			if(properties[i].buildings > 0){
+				document.getElementById(id_property + "casa" + properties[i].buildings).style.backgroundColor = "#FFFFFF";	
+				properties[i].buildings -= 1;
+				owner_id = properties[i].owner;
+				alert("Ha demolido una casa de la propiedad, el banco le pagará los dividendos");
 					for(var j=0; j<players.length; ++j){												// Se aumenta el efectivo, el valor de activos sigue igual
 						if(players[j].id == owner_id){
 							players[j].liquid_money += properties[i].building_sale;
@@ -285,60 +289,60 @@ function demolish(id_property){
 					alert("Alerta, No posee ninguna construcción en esta propiedad !!!");
 				}
 			}
-	}
-	refresh_player_money();
-}
-
-function pay_morgage(paying_player_id,player_position){
-	owner_id = properties[player_position].owner;
-	built_houses = properties[player_position].buildings;
-	if(owner_id == paying_player_id){
-		alert(" ¡¡ Se encuentra de visita en su propiedad !!");
-	}else{
-		alert("Bienvenido, debe pagar "+properties[player_position].morgage_prices[built_houses]+" de renta en esta propiedad.");
+		}
+		refresh_player_money();
 	}
 
-	for(var i=0; i<players.length;++i){
-		if(players[i].id == paying_player_id){
-			players[i].liquid_money -= properties[player_position].morgage_prices[built_houses];
-			players[i].asset_liquid_money -= properties[player_position].morgage_prices[built_houses];
+	function pay_morgage(paying_player_id,player_position){
+		owner_id = properties[player_position].owner;
+		built_houses = properties[player_position].buildings;
+		if(owner_id == paying_player_id){
+			alert(" ¡¡ Se encuentra de visita en su propiedad !!");
+		}else{
+			alert("Bienvenido, debe pagar "+properties[player_position].morgage_prices[built_houses]+" de renta en esta propiedad.");
+		}
+
+		for(var i=0; i<players.length;++i){
+			if(players[i].id == paying_player_id){
+				players[i].liquid_money -= properties[player_position].morgage_prices[built_houses];
+				players[i].asset_liquid_money -= properties[player_position].morgage_prices[built_houses];
+			}
+		}
+		for(var j=0; j<players.length;++j){
+			if(players[j].id == owner_id){
+				players[j].liquid_money += properties[player_position].morgage_prices[built_houses];
+				players[j].asset_liquid_money += properties[player_position].morgage_prices[built_houses];
+			}
 		}
 	}
-	for(var j=0; j<players.length;++j){
-		if(players[j].id == owner_id){
-			players[j].liquid_money += properties[player_position].morgage_prices[built_houses];
-			players[j].asset_liquid_money += properties[player_position].morgage_prices[built_houses];
-		}
-	}
-}
 
-function refresh_player_money(player_id){
-	for(var i=0; i<players.length;++i){
+	function refresh_player_money(player_id){
+		for(var i=0; i<players.length;++i){
 			var innerdiv = document.getElementById("player_"+players[i].id+"_points");
 			innerdiv.innerHTML = players[i].liquid_money+"/"+players[i].asset_liquid_money;
 			var outerdiv = document.getElementById("player" + players[i].id);
 			outerdiv.innerHTML = players[i].name;
 			outerdiv.appendChild(innerdiv);
-	}
-}
-
-function counter_active_players(){
-	var counter = 0;
-	for(var i=0; i<players.length;++i){
-		if(players[i].active_player == true){
-			++counter;
 		}
 	}
-	return counter;
-}
 
-function mark_player_turn(id_player){
-	document.getElementById("player"+id_player).style.border = "thick solid #0000FF";
-}
+	function counter_active_players(){
+		var counter = 0;
+		for(var i=0; i<players.length;++i){
+			if(players[i].active_player == true){
+				++counter;
+			}
+		}
+		return counter;
+	}
 
-function demark_player_turn(id_player){
-	document.getElementById("player"+id_player).style.border = "none";
-}
+	function mark_player_turn(id_player){
+		document.getElementById("player"+id_player).style.border = "thick solid #0000FF";
+	}
+
+	function demark_player_turn(id_player){
+		document.getElementById("player"+id_player).style.border = "none";
+	}
 
 function position_manager(dice_number, player_pos){				// Encargado de asignar entre las 16 posiciones posibles
 	while(dice_number > 0){
@@ -423,13 +427,21 @@ var hotChair;
 var arr = [];
 
 for (var prop in questions) {
-    arr.push(questions[prop]);
+	arr.push(questions[prop]);
 }
 
 console.log(arr[0]);
 
 function showQuestion(){
-		currentQuestion++;
+
+	document.getElementById("textoPregunta").style.visibility = "visible";
+	document.getElementById("respuesta1").style.visibility = "visible";
+	document.getElementById("respuesta2").style.visibility = "visible";
+	document.getElementById("respuesta3").style.visibility = "visible";
+	document.getElementById("respuesta4").style.visibility = "visible";
+	document.getElementById("respuesta5").style.visibility = "visible";
+
+	currentQuestion++;
 
 	if (currentQuestion == 63) {
 		currentQuestion = 0;
@@ -453,26 +465,56 @@ function showQuestion(){
 }
 
 function validateAnswer(playerAnswer){
+
+	
+
 	if (playerAnswer == arr[0][currentQuestion].answer) {
 		alert("¡Respuesta correcta! Ganas dinero!!!");
-	} else {
-	alert("Respuesta incorrecta :( Pierdes la mitad de dinero");
-	}
+		//players[currentIndex].liquid_money += 50;
 
-	if (hotChair) {
-		players[currentPlayer].liquid_money += 50;
+		for(var i=0; i < players.length; ++i){
+			if(players[i].id == pastPlayer){
+				players[i].liquid_money += 50;
+				players[i].asset_liquid_money += 50;
+				players[i].poisoned = false;
+			}
+		}
 	} else {
-		players[currentPlayer].liquid_money -= 25;
-		if (players[currentPlayer].liquid_money < 0) {
-			players[currentPlayer].liquid_money = 0;
+		alert("Respuesta incorrecta :( Pierdes la mitad de dinero");
+		for(var i=0; i < players.length; ++i){
+			if(players[i].id == pastPlayer){
+				players[i].liquid_money -= 25;
+				players[i].asset_liquid_money -= 25;
+				if(hotChair == false){
+					players[i].poisoned = true;
+				}
+			}
 		}
 	}
+
+	document.getElementById("textoPregunta").style.visibility = "hidden";
+	document.getElementById("respuesta1").style.visibility = "hidden";
+	document.getElementById("respuesta2").style.visibility = "hidden";
+	document.getElementById("respuesta3").style.visibility = "hidden";
+	document.getElementById("respuesta4").style.visibility = "hidden";
+	document.getElementById("respuesta5").style.visibility = "hidden";
+
+	// if (hotChair) {
+	// 	players[currentPlayer].liquid_money += 50;
+	// } else {
+	// 	players[currentPlayer].liquid_money -= 25;
+	// 	if (players[currentPlayer].liquid_money < 0) {
+	// 		players[currentPlayer].liquid_money = 0;
+	// 	}
+	// }
+	refresh_player_money();
 }
 
 function player_finished(){
 	demark_player_turn(pastPlayer);
 	mark_player_turn(currentPlayer);
 	deactivate_property_buttons();
+
 }
 
 function activate_property_button(player_id){
@@ -486,9 +528,9 @@ function activate_property_button(player_id){
 					sell.style.visibility = 'visible';
 				}
 			}
-}
+		}
 
-function deactivate_property_buttons(){
+		function deactivate_property_buttons(){
 	for(var j=1; j < 13; ++j){				// Inspeccion a las propiedades
 		document.getElementById('build'+j+'.2').style.visibility = 'hidden';
 		document.getElementById('sell'+j+'.3').style.visibility = 'hidden';
@@ -497,20 +539,46 @@ function deactivate_property_buttons(){
 }
 
 function gameOn(){
-	//if(finished_turn){
-		pastPlayer = currentPlayer;
+	// document.getElementById("1casa1").style.backgroundColor = "#33FDFF";
+	pastPlayer = currentPlayer;
+	var isPoisoned = false;
+	var keepGoing = true;
+	var isDumb = true;
+
+	for(var i=0; i<players.length && keepGoing; ++i){
+
+		if(players[i].id == currentPlayer && players[i].poisoned == false){
+			stopstart();
+			movePlayerRight(chosenRandom,currentPlayer);
+			document.getElementById("dice").style.pointerEvents = "none";
+			keepGoing == false;
+			isDumb = false;
+		}
+
+	}
+
+	if(isDumb){
+		alert("El jugador actual permanece en la cueva!!!!");
 		stopstart();
-		movePlayerRight(chosenRandom,currentPlayer);
-		document.getElementById("dice").style.pointerEvents = "none";
-		activate_property_button(currentPlayer);
-		window.setTimeout(function () {
+	}
+
+
+	activate_property_button(currentPlayer);
+	window.setTimeout(function () {
 
 			//deactivate_property_buttons();
-			new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
+			if(isDumb){
+				new_position = 8;
+
+			}else{
+				new_position = position_manager(chosenRandom,players[currentIndex].current_position_board);
 			if(new_position < players[currentIndex].current_position_board && new_position != 0){					// Si el jugador pasa por la entrada y no cae en ella
 				entrance_cell(players[currentIndex].id);																										// se suman los puntos a su cuenta de igual forma
 			}
 			players[currentIndex].current_position_board = new_position;
+		}	
+
+
 
 			// 					Posiciones del tablero
 			// 					0 = entrada
@@ -532,8 +600,8 @@ function gameOn(){
 				showQuestion();
 				break;
 				case 8:
-				cave_cell(players[currentIndex].id);
 				hotChair = false;
+				cave_cell(players[currentIndex].id);
 				showQuestion();
 				break;
 				case 13:
@@ -555,15 +623,11 @@ function gameOn(){
 			}
 			currentPlayer = players[currentIndex].id;
 
-//			stopstart();
-	//		finished_turn = false;
-
+			// demark_player_turn(pastPlayer);
+			// mark_player_turn(currentPlayer);
+			refresh_player_money();
 		}, 1500);
-	//}else{
-		//alert("El jugador debe terminar su turno !!! ");
-	//}
-
-};
+}
 
 function start_play(){
 	if(players.length >= 2){													// Juego activo
@@ -572,12 +636,12 @@ function start_play(){
 		dice = document.getElementById("dice");
 		stopstart();
 		movePlayer();
-  	properties_creator();
+		properties_creator();
 		deactivate_property_buttons();
-  	currentPlayer = players[0].id;
-  	currentIndex = 0;
-  	mark_player_turn(players[currentIndex].id);
-  	stopstart();
+		currentPlayer = players[0].id;
+		currentIndex = 0;
+		mark_player_turn(players[currentIndex].id);
+		stopstart();
 	}else{
 		alert("Son necesarios dos o más jugadores para iniciar la partida.");
 	}

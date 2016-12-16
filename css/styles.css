@@ -263,3 +263,22 @@ h2.centerh2heading {
   .multipleChoice {
     font-weight: bold;
   }
+
+.timages th {
+}
+
+.cp_img {
+    height:15px;
+    width: 25px;
+}
+
+.cp_img>img {
+    max-height:75px;
+    max-width:75px;
+    display:block;
+    margin:0 auto;
+}
+
+.demolish {
+  fill: red;
+}
