@@ -238,22 +238,30 @@ function sell_property(id_property){
 				}
 			}
 			properties[i].owner = 666;																		// Se modifica el dueno al banco
+			alert("Se ha vendido la propiedad al banco, su dinero se depositará en su cuenta.");
 		}
 	}
 }
 
 function build_house(id_property){
 	owner_id = 0;
+	console.log("id de propiedad: "+id_property);
 	for(var i=0; i<properties.length; ++i){
-		if(properties[i].property_number == id_property){
-			properties[i].buildings += 1;																// Se agrega una casa
+		if(properties[i].property_number == id_property ){
 			owner_id = properties[i].owner;
-			for(var j=0; j<players.length; ++j){												// Se aumenta el valor de activos del dueno y reduce efectivo
-				if(players[j].id == owner_id){
-					players[j].liquid_money -= properties[i].building_buy;
-					players[j].asset_liquid_money -= properties[i].building_buy;
-					players[j].asset_liquid_money += properties[i].building_sale;
+			if(properties[i].buildings < 5){
+				properties[i].buildings += 1;																// Se agrega una casa
+				for(var j=0; j<players.length; ++j){												// Se aumenta el valor de activos del dueno y reduce efectivo
+					if(players[j].id == owner_id){
+						players[j].liquid_money -= properties[i].building_buy;
+						players[j].asset_liquid_money -= properties[i].building_buy;
+						players[j].asset_liquid_money += properties[i].building_sale;
+						alert("Ha construído una casa en la propiedad, felicidades!!!");
+					}
 				}
+			}else{
+				alert("Has llegado al máximo de casas en esta propiedad, no puedes construír más.");
+				break;
 			}
 		}
 	}
@@ -261,15 +269,20 @@ function build_house(id_property){
 
 function demolish(id_property){
 	for(var i=0; i<properties.length; ++i){
-		if(properties[i].property_number == id_property && properties[i].buildings > 0){
-			properties[i].buildings -= 1;
-			owner_id = properties[i].owner;
-			for(var j=0; j<players.length; ++j){												// Se aumenta el efectivo, el valor de activos sigue igual
-				if(players[j].id == owner_id){
-					players[j].liquid_money += properties[i].building_sale;
+		if(properties[i].property_number == id_property){
+				if(properties[i].buildings > 0){
+					properties[i].buildings -= 1;
+					owner_id = properties[i].owner;
+					alert("Ha demolido una casa de la propiedad, el banco le pagará los dividendos");
+					for(var j=0; j<players.length; ++j){												// Se aumenta el efectivo, el valor de activos sigue igual
+						if(players[j].id == owner_id){
+							players[j].liquid_money += properties[i].building_sale;
+						}
+					}
+				}else{
+					alert("Alerta, No posee ninguna construcción en esta propiedad !!!");
 				}
 			}
-		}
 	}
 }
 
@@ -474,8 +487,6 @@ function activate_property_button(player_id){
 
 function deactivate_property_buttons(){
 	for(var j=1; j < 13; ++j){				// Inspeccion a las propiedades
-		//console.log('demolish'+j+'.1');
-		//console.log(demolish);
 		document.getElementById('build'+j+'.2').style.visibility = 'hidden';
 		document.getElementById('sell'+j+'.3').style.visibility = 'hidden';
 		document.getElementById('demolish'+j+'.1').style.visibility = 'hidden';
